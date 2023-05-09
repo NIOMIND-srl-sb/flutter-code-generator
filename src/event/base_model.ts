@@ -11,10 +11,6 @@ export class BaseModelFile extends BaseFile {
         this.createFolder();
     }
 
-    createFolder(): void {
-        FileSystemManager.createFolder(this.pathValue);
-    }
-
     get pathValue(): string {
         if (this.folders === undefined) {
             return path.join(this.rootPath, 'lib', 'src', 'model', 'base');
@@ -42,13 +38,4 @@ export class BaseModelFile extends BaseFile {
         );
         YamlHelper.initializeWithDependencies();
     }
-
-    // createFiles(fileName: string, data: string): void {
-    //     const filePath = path.join(this.pathValue, this.getFileName);
-    //     if (existsSync(filePath)) {
-    //         AppLogger.error(`${fileName} already exists`);
-    //         return;
-    //     }
-    //     FileSystemManager.createFile(this.pathValue, fileName, data);
-    // }
 }

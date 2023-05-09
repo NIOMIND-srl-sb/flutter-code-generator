@@ -30,9 +30,11 @@ export abstract class BaseFile {
         FileSystemManager.createFile(pathValue, fileName, data);
     }
 
-    abstract create(): void;
+    createFolder(): void {
+        FileSystemManager.createFolder(this.pathValue);
+    }
 
-    abstract createFolder(): void;
+    abstract create(): void;
 
     abstract get pathValue(): string;
 }
