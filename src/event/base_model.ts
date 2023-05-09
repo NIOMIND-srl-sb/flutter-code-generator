@@ -1,6 +1,5 @@
 import * as path from 'path';
 import * as _ from 'lodash';
-import { FileSystemManager } from '../utility/file_system_manager';
 import { YamlHelper } from '../utility/yaml_helper';
 import { BaseModel } from '../template/base_model';
 import { BaseFile } from './base/base';

@@ -1,10 +1,4 @@
-import {
-    WriteFileOptions,
-    writeFileSync,
-    existsSync,
-    readFile,
-    readFileSync,
-} from 'fs';
+import { writeFileSync, existsSync, readFileSync } from 'fs';
 import * as path from 'path';
 import { Utils } from './utils';
 import * as shell from 'shelljs';
