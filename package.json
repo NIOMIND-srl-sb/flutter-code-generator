@@ -9,23 +9,43 @@
     "categories": [
         "Other"
     ],
-    "activationEvents": [],
+    "activationEvents": [
+        "onCommand:extension.createBaseModel",
+        "onCommand:extension.createModel"
+    ],
     "main": "./out/extension.js",
     "contributes": {
         "commands": [
             {
-                "command": "flutter-code-generator.helloWorld",
-                "title": "Hello World"
+                "command": "flutter-code-generator.createBaseModel",
+                "title": "Create BaseModel file",
+                "category": "Flutter Architecture"
+            },
+            {
+                "command": "flutter-code-generator.createModel",
+                "title": "Create Model file",
+                "category": "Flutter Architecture"
             }
-        ]
+        ],
+        "menus": {
+            "explorer/context": [
+                {
+                    "command": "flutter-code-generator.createBaseModel",
+                    "group": "1_flutter_code_generatoer"
+                },
+                {
+                    "command": "flutter-code-generator.createModel",
+                    "group": "1_flutter_code_generatoer"
+                }
+            ]
+        }
     },
     "scripts": {
         "vscode:prepublish": "npm run compile",
         "compile": "tsc -p ./",
         "watch": "tsc -watch -p ./",
         "pretest": "npm run compile && npm run lint",
-        "lint": "eslint src --ext ts",
-        "test": "node ./out/test/runTest.js"
+        "lint": "eslint src --ext ts"
     },
     "devDependencies": {
         "@types/vscode": "^1.78.0",
@@ -42,5 +62,10 @@
         "mocha": "^10.2.0",
         "typescript": "^5.0.4",
         "@vscode/test-electron": "^2.3.0"
+    },
+    "dependencies": {
+        "js-yaml": "^3.13.1",
+        "lodash": "^4.17.15",
+        "shelljs": "^0.8.3"
     }
 }
