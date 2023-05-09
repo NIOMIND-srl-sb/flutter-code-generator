@@ -1,10 +1,10 @@
 import * as vscode from 'vscode';
-import { AppLogger } from './utils/logger';
-import { ModelFile } from './events/model';
-import { VsCodeActions } from './utils/vs_cose_actions';
-import { FileSystemManager } from './utils/file_system_manager';
-import { Utils } from './utils/utils';
-import { BaseModelFile } from './events/base_model';
+import { AppLogger } from './utility/logger';
+import { ModelFile } from './event/model';
+import { VsCodeActions } from './utility/vs_cose_actions';
+import { FileSystemManager } from './utility/file_system_manager';
+import { Utils } from './utility/utils';
+import { BaseModelFile } from './event/base_model';
 import * as _ from 'lodash';
 
 export function activate(context: vscode.ExtensionContext) {

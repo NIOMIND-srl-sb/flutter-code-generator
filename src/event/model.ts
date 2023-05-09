@@ -1,8 +1,8 @@
 import * as path from 'path';
 import * as _ from 'lodash';
-import { FileSystemManager } from '../utils/file_system_manager';
-import { Model } from '../templates/model';
-import { YamlHelper } from '../utils/yaml_helper';
+import { FileSystemManager } from '../utility/file_system_manager';
+import { Model } from '../template/model';
+import { YamlHelper } from '../utility/yaml_helper';
 import { BaseFile } from './base/base';
 
 export class ModelFile extends BaseFile {

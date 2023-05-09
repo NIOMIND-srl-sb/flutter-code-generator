@@ -1,6 +1,6 @@
 import * as path from 'path';
-import { AppLogger } from '../../utils/logger';
-import { FileSystemManager } from '../../utils/file_system_manager';
+import { AppLogger } from '../../utility/logger';
+import { FileSystemManager } from '../../utility/file_system_manager';
 import { existsSync } from 'fs';
 
 export abstract class BaseFile {
