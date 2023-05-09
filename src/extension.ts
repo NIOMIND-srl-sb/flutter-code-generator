@@ -1,25 +1,33 @@
 import * as vscode from 'vscode';
 import { AppLogger } from './utility/logger';
-import { ModelFile } from './event/model';
+import { ModelFile } from './event/model/model';
+import { BaseModelFile } from './event/model/base_model';
 import { VsCodeActions } from './utility/vs_cose_actions';
 import { FileSystemManager } from './utility/file_system_manager';
 import { Utils } from './utility/utils';
-import { BaseModelFile } from './event/base_model';
 import * as _ from 'lodash';
+import { BaseAppColorFile } from './event/style/base_app_color';
+import { BaseDiAppThemeFile } from './event/style/base_di_app_theme';
+import { BaseElevationFile } from './event/style/base_elevation';
+import { BaseThemeFile } from './event/style/base_theme';
+import { BaseTypographyFile } from './event/style/base_typography';
+import { DiThemeFile } from './event/style/di_theme';
+import { ColorFile } from './event/style/color';
+import { ElevationFile } from './event/style/elevation';
+import { ThemeFile } from './event/style/theme';
+import { TypographyFile } from './event/style/typography';
 
 export function activate(context: vscode.ExtensionContext) {
-    const baseModelFileName = 'base_model';
-
     const modelDisposable = vscode.commands.registerCommand(
         'flutter-code-generator.createModel',
         async () => {
-            const inputString = await checkInputString();
+            const inputString = await Utils.checkInputString();
             if (inputString === undefined) {
                 AppLogger.error('Invalid name for file');
                 return;
             }
-            const folders = getFolders(inputString);
-            const fileName = getFileName(inputString);
+            const folders = Utils.getFolders(inputString);
+            const fileName = Utils.getFileName(inputString);
             if (fileName === undefined) {
                 AppLogger.error('Invalid name for file');
                 return;
@@ -28,10 +36,7 @@ export function activate(context: vscode.ExtensionContext) {
             if (rootPath === undefined) {
                 return;
             }
-            const baseModelFile = new BaseModelFile(
-                rootPath,
-                baseModelFileName
-            );
+            const baseModelFile = new BaseModelFile(rootPath, 'base_model');
 
             const isExistBaseModelFile = FileSystemManager.doesFileExist(
                 baseModelFile.pathValue,
@@ -39,82 +44,59 @@ export function activate(context: vscode.ExtensionContext) {
             );
             if (!isExistBaseModelFile) {
                 baseModelFile.create();
-                AppLogger.info('File BaseModel is created successfully');
             }
             const modelFile = new ModelFile(rootPath, fileName, folders);
             modelFile.create();
-            AppLogger.info('File Model is created successfully');
+            AppLogger.info('Model is created successfully');
         }
     );
 
-    const baseModelDisposable = vscode.commands.registerCommand(
-        'flutter-code-generator.createBaseModel',
+    const styleDisposable = vscode.commands.registerCommand(
+        'flutter-code-generator.createStyle',
         async () => {
             const rootPath = VsCodeActions.rootPath;
-            const fileName = baseModelFileName;
             if (rootPath === undefined) {
                 return;
             }
-            const baseModelFile = new BaseModelFile(rootPath, fileName);
-            baseModelFile.create();
-            AppLogger.info('File BaseModel is created successfully');
+            const baseAppColorFile = new BaseAppColorFile(
+                rootPath,
+                'base_color'
+            );
+            const baseDiAppThemeFile = new BaseDiAppThemeFile(
+                rootPath,
+                'base_di_app_theme'
+            );
+            const baseElevationFile = new BaseElevationFile(
+                rootPath,
+                'base_elevation'
+            );
+            const baseThemeFile = new BaseThemeFile(rootPath, 'base_theme');
+            const baseTypographyFile = new BaseTypographyFile(
+                rootPath,
+                'base_typography'
+            );
+            const diThemeFile = new DiThemeFile(rootPath, 'di_theme');
+            const colorFile = new ColorFile(rootPath, 'color');
+            const elevationColorFile = new ElevationFile(rootPath, 'elevation');
+            const themeFile = new ThemeFile(rootPath, 'theme');
+            const typographyFile = new TypographyFile(rootPath, 'typography');
+
+            baseAppColorFile.create();
+            baseDiAppThemeFile.create();
+            baseElevationFile.create();
+            baseThemeFile.create();
+            baseTypographyFile.create();
+            diThemeFile.create();
+            colorFile.create();
+            elevationColorFile.create();
+            themeFile.create();
+            typographyFile.create();
+            AppLogger.info('Style is created successfully');
         }
     );
 
     context.subscriptions.push(modelDisposable);
-    context.subscriptions.push(baseModelDisposable);
-
-    const checkInputString = async () => {
-        if (!FileSystemManager.isFlutterProject()) {
-            return;
-        }
-        const inputString = await VsCodeActions.getInputString(
-            'Enter class name',
-            async (value) => {
-                if (value.length === 0) {
-                    return 'Enter class name';
-                }
-                if (value.toLowerCase() === 'view') {
-                    return 'View is not a valid class name';
-                }
-                return undefined;
-            }
-        );
-        if (inputString.length === 0 || inputString.toLowerCase() === 'view') {
-            console.warn('activate: inputString length is 0');
-            return;
-        }
-        console.debug(`fileName: { ${inputString} }`);
-        return inputString;
-    };
-
-    const getFolders = (inputString: String) => {
-        const nameArray = inputString.trim().split('/');
-        let folders: string[] = [];
-        if (nameArray.length > 1) {
-            const folderList = nameArray
-                .splice(0, nameArray.length - 1)
-                .map((element) => {
-                    return element;
-                });
-            console.debug(`folderlist: { ${folderList} }`);
-            folders = folderList;
-        }
-        console.debug(`folders: { ${folders} }`);
-        return folders;
-    };
-
-    const getFileName = (inputString: String) => {
-        const nameArray = inputString.trim().split('/');
-        const formattedInputString = _.last(nameArray);
-        if (formattedInputString === undefined) {
-            console.error('formattedInputString is undefined');
-            return;
-        }
-        const fileName = Utils.processFileName(formattedInputString);
-        console.debug(`activate: fileName: ${fileName}`);
-        return fileName;
-    };
+    context.subscriptions.push(styleDisposable);
 }
 
 export function deactivate() {}

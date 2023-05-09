@@ -1,6 +1,8 @@
 import * as vscode from 'vscode';
 import _ = require('lodash');
 import { AppLogger } from './logger';
+import { FileSystemManager } from './file_system_manager';
+import { VsCodeActions } from './vs_cose_actions';
 
 export class Utils {
     public static isValidClassName(className: string): string | undefined {
@@ -66,4 +68,56 @@ export class Utils {
 
         return fileName.trim();
     }
+
+    public static checkInputString = async () => {
+        if (!FileSystemManager.isFlutterProject()) {
+            return;
+        }
+        const inputString = await VsCodeActions.getInputString(
+            'Enter class name',
+            async (value) => {
+                if (value.length === 0) {
+                    return 'Enter class name';
+                }
+                if (value.toLowerCase() === 'view') {
+                    return 'View is not a valid class name';
+                }
+                return undefined;
+            }
+        );
+        if (inputString.length === 0 || inputString.toLowerCase() === 'view') {
+            console.warn('activate: inputString length is 0');
+            return;
+        }
+        console.debug(`fileName: { ${inputString} }`);
+        return inputString;
+    };
+
+    public static getFolders = (inputString: String) => {
+        const nameArray = inputString.trim().split('/');
+        let folders: string[] = [];
+        if (nameArray.length > 1) {
+            const folderList = nameArray
+                .splice(0, nameArray.length - 1)
+                .map((element) => {
+                    return element;
+                });
+            console.debug(`folderlist: { ${folderList} }`);
+            folders = folderList;
+        }
+        console.debug(`folders: { ${folders} }`);
+        return folders;
+    };
+
+    public static getFileName = (inputString: String) => {
+        const nameArray = inputString.trim().split('/');
+        const formattedInputString = _.last(nameArray);
+        if (formattedInputString === undefined) {
+            console.error('formattedInputString is undefined');
+            return;
+        }
+        const fileName = Utils.processFileName(formattedInputString);
+        console.debug(`activate: fileName: ${fileName}`);
+        return fileName;
+    };
 }

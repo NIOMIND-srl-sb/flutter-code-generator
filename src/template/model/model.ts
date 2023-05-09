@@ -1,14 +1,9 @@
-import * as _ from 'lodash';
-import { BaseTemplate } from './base/base';
+import { BaseTemplate } from '../base/base';
 
 export class Model extends BaseTemplate {
     private _dartString: string;
 
-    constructor(
-        fileName: string,
-        suffix: string,
-        private projectName?: string
-    ) {
+    constructor(fileName: string, suffix: string) {
         super(fileName, suffix);
         this._dartString = `import 'base/base_model.dart';
 

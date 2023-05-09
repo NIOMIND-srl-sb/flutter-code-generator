@@ -10,31 +10,31 @@
         "Other"
     ],
     "activationEvents": [
-        "onCommand:extension.createBaseModel",
-        "onCommand:extension.createModel"
+        "onCommand:extension.createModel",
+        "onCommand:extension.createStyle"
     ],
     "main": "./out/extension.js",
     "contributes": {
         "commands": [
             {
-                "command": "flutter-code-generator.createBaseModel",
-                "title": "Create BaseModel file",
+                "command": "flutter-code-generator.createModel",
+                "title": "Create Model file",
                 "category": "Flutter Architecture"
             },
             {
-                "command": "flutter-code-generator.createModel",
-                "title": "Create Model file",
+                "command": "flutter-code-generator.createStyle",
+                "title": "Create Style file",
                 "category": "Flutter Architecture"
             }
         ],
         "menus": {
             "explorer/context": [
                 {
-                    "command": "flutter-code-generator.createBaseModel",
+                    "command": "flutter-code-generator.createModel",
                     "group": "1_flutter_code_generatoer"
                 },
                 {
-                    "command": "flutter-code-generator.createModel",
+                    "command": "flutter-code-generator.createStyle",
                     "group": "1_flutter_code_generatoer"
                 }
             ]

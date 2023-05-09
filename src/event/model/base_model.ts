@@ -1,8 +1,8 @@
 import * as path from 'path';
 import * as _ from 'lodash';
-import { YamlHelper } from '../utility/yaml_helper';
-import { BaseModel } from '../template/base_model';
-import { BaseFile } from './base/base';
+import { YamlHelper } from '../../utility/yaml_helper';
+import { BaseModel } from '../../template/model/base_model';
+import { BaseFile } from '../base/base';
 
 export class BaseModelFile extends BaseFile {
     constructor(rootPath: string, fileName: string, folders?: string[]) {
@@ -25,11 +25,7 @@ export class BaseModelFile extends BaseFile {
     }
 
     create(): void {
-        const baseModel = new BaseModel(
-            this.getFileName,
-            'Model',
-            YamlHelper.getProjectName()
-        );
+        const baseModel = new BaseModel(this.getFileName, 'Model');
         this.createFiles(
             this.pathValue,
             this.getFileName,
