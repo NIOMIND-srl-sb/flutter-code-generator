@@ -16,6 +16,11 @@ import { ColorFile } from './event/style/color';
 import { ElevationFile } from './event/style/elevation';
 import { ThemeFile } from './event/style/theme';
 import { TypographyFile } from './event/style/typography';
+import { BaseAppSettingsFile } from './event/app/base_app_settings';
+import { BaseDiAppSettingsFile } from './event/app/base_di_app_settings';
+import { DiAppSettingsFile } from './event/app/di_app_settings';
+import { AppSettingsFile } from './event/app/app_settings';
+import { AppFile } from './event/app/app';
 
 export function activate(context: vscode.ExtensionContext) {
     const modelDisposable = vscode.commands.registerCommand(
@@ -95,8 +100,55 @@ export function activate(context: vscode.ExtensionContext) {
         }
     );
 
+    const appDisposable = vscode.commands.registerCommand(
+        'flutter-code-generator.createApp',
+        async () => {
+            const inputString = await Utils.checkInputString();
+            if (inputString === undefined) {
+                AppLogger.error('Invalid name for file');
+                return;
+            }
+            const folders = Utils.getFolders(inputString);
+            const fileName = Utils.getFileName(inputString);
+            if (fileName === undefined) {
+                AppLogger.error('Invalid name for file');
+                return;
+            }
+            const rootPath = VsCodeActions.rootPath;
+            if (rootPath === undefined) {
+                return;
+            }
+
+            const baseAppSettingsFile = new BaseAppSettingsFile(
+                rootPath,
+                'base_app_settings'
+            );
+            const baseDiAppSettingsFile = new BaseDiAppSettingsFile(
+                rootPath,
+                'base_di_app_settings'
+            );
+            const diAppSettingsFile = new DiAppSettingsFile(
+                rootPath,
+                'di_app_settings'
+            );
+            const appSettingsFile = new AppSettingsFile(
+                rootPath,
+                'app_settings'
+            );
+            const appFile = new AppFile(rootPath, fileName, folders);
+
+            baseAppSettingsFile.create();
+            baseDiAppSettingsFile.create();
+            diAppSettingsFile.create();
+            appSettingsFile.create();
+            appFile.create();
+            AppLogger.info('App is created successfully');
+        }
+    );
+
     context.subscriptions.push(modelDisposable);
     context.subscriptions.push(styleDisposable);
+    context.subscriptions.push(appDisposable);
 }
 
 export function deactivate() {}

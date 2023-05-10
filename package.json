@@ -11,7 +11,8 @@
     ],
     "activationEvents": [
         "onCommand:extension.createModel",
-        "onCommand:extension.createStyle"
+        "onCommand:extension.createStyle",
+        "onCommand:extension.createApp"
     ],
     "main": "./out/extension.js",
     "contributes": {
@@ -25,6 +26,11 @@
                 "command": "flutter-code-generator.createStyle",
                 "title": "Create Style file",
                 "category": "Flutter Architecture"
+            },
+            {
+                "command": "flutter-code-generator.createApp",
+                "title": "Create App file",
+                "category": "Flutter Architecture"
             }
         ],
         "menus": {
@@ -35,6 +41,10 @@
                 },
                 {
                     "command": "flutter-code-generator.createStyle",
+                    "group": "1_flutter_code_generatoer"
+                },
+                {
+                    "command": "flutter-code-generator.createApp",
                     "group": "1_flutter_code_generatoer"
                 }
             ]

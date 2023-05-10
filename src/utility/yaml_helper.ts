@@ -6,11 +6,31 @@ import { AppLogger } from './logger';
 
 export class YamlHelper {
     public static initializeWithDependencies() {
-        const provider = this.getProvider();
+        const providerVersion = '^6.0.5';
+        const json = this.getPubspecJsonFile();
+        if (json === undefined) {
+            return undefined;
+        }
+        const object = JSON.parse(json);
+        const provider = this.getProvider(object);
         AppLogger.debug(`provider: ${provider}`);
-        if (provider === undefined) {
-            this.addDependencyToPubspec('provider', '^6.0.5');
-            // this.addAssetComment();
+
+        let haveToUpdate = false;
+        if (provider === undefined || provider !== providerVersion) {
+            object['dependencies']['provider'] = providerVersion;
+            haveToUpdate = true;
+        }
+
+        const flutterLocalizations = this.getFlutterLocalizations(object);
+        AppLogger.debug(`flutterLocalizations: ${flutterLocalizations}`);
+        if (flutterLocalizations === undefined) {
+            object['dependencies']['flutter_localizations'] = {
+                sdk: 'flutter',
+            };
+            haveToUpdate = true;
+        }
+        if (haveToUpdate) {
+            this.addDependencyToPubspec(object);
         }
     }
 
@@ -43,23 +63,15 @@ export class YamlHelper {
         return object['name'];
     }
 
-    public static getProvider(): string | undefined {
-        const json = this.getPubspecJsonFile();
-        if (json === undefined) {
-            return undefined;
-        }
-        const object = JSON.parse(json);
-
+    public static getProvider(object: any): string | undefined {
         return object['dependencies']['provider'];
     }
 
-    private static addDependencyToPubspec(module: string, version?: string) {
-        const json = this.getPubspecJsonFile();
-        if (json === undefined) {
-            return;
-        }
-        const object = JSON.parse(json);
-        object['dependencies'][module] = `${version}`;
+    public static getFlutterLocalizations(object: any): string | undefined {
+        return object['dependencies']['flutter_localizations'];
+    }
+
+    private static addDependencyToPubspec(object: any) {
         const modifiedString = JSON.stringify(object);
         AppLogger.debug(
             `addDependencyToPubspec: modifiledString: ${modifiedString}`
@@ -71,12 +83,7 @@ export class YamlHelper {
         this.overwritePubspecFile(updatedYaml);
     }
 
-    private static upgradeDartVersion() {
-        const json = this.getPubspecJsonFile();
-        if (json === undefined) {
-            return;
-        }
-        const object = JSON.parse(json);
+    private static upgradeDartVersion(object: any) {
         object['environment']['sdk'] = '>=2.19.6 <3.0.0';
         const modifiedString = JSON.stringify(object);
         AppLogger.debug(
@@ -86,51 +93,6 @@ export class YamlHelper {
         if (updatedYaml === undefined) {
             return;
         }
-        this.overwritePubspecFile(updatedYaml);
-    }
-
-    private static addAssetComment() {
-        const json = this.getPubspecJsonFile();
-        if (json === undefined) {
-            return;
-        }
-        const object = JSON.parse(json);
-        const modifiedString = JSON.stringify(object);
-        let updatedYaml = this.toYAML(modifiedString);
-        if (updatedYaml === undefined) {
-            return;
-        }
-        updatedYaml += `\n\n  # To add assets to your application, add an assets section, like this:
-  # assets:
-  #  - images/a_dot_burr.jpeg
-  #  - images/a_dot_ham.jpeg
-      
-  # An image asset can refer to one or more resolution-specific "variants", see
-  # https://flutter.dev/assets-and-images/#resolution-aware.
-      
-  # For details regarding adding assets from package dependencies, see
-  # https://flutter.dev/assets-and-images/#from-packages
-      
-  # To add custom fonts to your application, add a fonts section here,
-  # in this "flutter" section. Each entry in this list should have a
-  # "family" key with the font family name, and a "fonts" key with a
-  # list giving the asset and other descriptors for the font. For
-  # example:
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
-  #       - asset: fonts/Schyler-Italic.ttf
-  #         style: italic
-  #   - family: Trajan Pro
-  #     fonts:
-  #       - asset: fonts/TrajanPro.ttf
-  #       - asset: fonts/TrajanPro_Bold.ttf
-  #         weight: 700
-  #
-  # For details regarding fonts from package dependencies,
-  # see https://flutter.dev/custom-fonts/#from-packages`;
-
         this.overwritePubspecFile(updatedYaml);
     }
 
