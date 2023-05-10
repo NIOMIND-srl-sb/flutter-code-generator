@@ -34,7 +34,8 @@ export class YamlHelper {
         const sharedPreferences = this.getSharedPreferences(object);
         AppLogger.debug(`sharedPreferences: ${sharedPreferences}`);
         if (sharedPreferences === undefined) {
-            object['dependencies']['shared_preferences'] = sharedPreferencesVersion;
+            object['dependencies']['shared_preferences'] =
+                sharedPreferencesVersion;
             haveToUpdate = true;
         }
 
@@ -42,7 +43,8 @@ export class YamlHelper {
         const flutterSecureStorage = this.getFlutterSecureStorage(object);
         AppLogger.debug(`flutterSecureStorage: ${flutterSecureStorage}`);
         if (flutterSecureStorage === undefined) {
-            object['dependencies']['flutter_secure_storage'] = flutterSecureStorageVersion;
+            object['dependencies']['flutter_secure_storage'] =
+                flutterSecureStorageVersion;
             haveToUpdate = true;
         }
 

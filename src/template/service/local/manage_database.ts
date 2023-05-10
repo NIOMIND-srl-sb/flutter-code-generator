@@ -1,11 +1,11 @@
 import { BaseTemplate } from '../../base/base';
 
 export class ManageDatabase extends BaseTemplate {
-  private _dartString: string;
+    private _dartString: string;
 
-  constructor(fileName: string, suffix: string) {
-    super(fileName, suffix);
-    this._dartString = `import '../base/base_manage_database.dart';
+    constructor(fileName: string, suffix: string) {
+        super(fileName, suffix);
+        this._dartString = `import '../base/base_manage_database.dart';
         
   class ManageDatabase extends BaseManageDatabase {
   const ManageDatabase();
@@ -17,9 +17,9 @@ export class ManageDatabase extends BaseTemplate {
     ];
   }
 }`;
-  }
+    }
 
-  get dartString(): string {
-    return this._dartString;
-  }
+    get dartString(): string {
+        return this._dartString;
+    }
 }

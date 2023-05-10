@@ -5,7 +5,6 @@ import { BaseModelFile } from './event/model/base_model';
 import { VsCodeActions } from './utility/vs_cose_actions';
 import { FileSystemManager } from './utility/file_system_manager';
 import { Utils } from './utility/utils';
-import * as _ from 'lodash';
 import { BaseAppColorFile } from './event/style/base_app_color';
 import { BaseDiAppThemeFile } from './event/style/base_di_app_theme';
 import { BaseElevationFile } from './event/style/base_elevation';
@@ -165,17 +164,52 @@ export function activate(context: vscode.ExtensionContext) {
                 return;
             }
 
-            const appDatabaseFile = new AppDatabaseFile(rootPath, 'app_database');
-            const appSecureStorageFile = new AppSecureStorageFile(rootPath, 'app_secure_storage');
-            const appSharedPreferencesFile = new AppSharedPreferencesFile(rootPath, 'app_shared_preferences');
-            const baseAppDatabaseFile = new BaseAppDatabaseFile(rootPath, 'base_app_database');
-            const baseAppSecureStorageFile = new BaseAppSecureStorageFile(rootPath, 'base_app_secure_storage');
-            const baseAppSharedPreferencesFile = new BaseAppSharedPreferencesFile(rootPath, 'base_app_shared_preferences');
-            const baseDatabaseFile = new BaseDatabaseFile(rootPath, 'base_database');
-            const baseDiLocalServiceFile = new BaseDiLocalServiceFile(rootPath, 'base_di_local_service');
-            const baseManageDatabaseFile = new BaseManageDatabaseFile(rootPath, 'base_manage_database');
-            const localServiceServiceLocatorFile = new LocalServiceServiceLocatorFile(rootPath, 'di_local_service');
-            const banageDatabaseFile = new ManageDatabaseFile(rootPath, 'manage_database');
+            const appDatabaseFile = new AppDatabaseFile(
+                rootPath,
+                'app_database'
+            );
+            const appSecureStorageFile = new AppSecureStorageFile(
+                rootPath,
+                'app_secure_storage'
+            );
+            const appSharedPreferencesFile = new AppSharedPreferencesFile(
+                rootPath,
+                'app_shared_preferences'
+            );
+            const baseAppDatabaseFile = new BaseAppDatabaseFile(
+                rootPath,
+                'base_app_database'
+            );
+            const baseAppSecureStorageFile = new BaseAppSecureStorageFile(
+                rootPath,
+                'base_app_secure_storage'
+            );
+            const baseAppSharedPreferencesFile =
+                new BaseAppSharedPreferencesFile(
+                    rootPath,
+                    'base_app_shared_preferences'
+                );
+            const baseDatabaseFile = new BaseDatabaseFile(
+                rootPath,
+                'base_database'
+            );
+            const baseDiLocalServiceFile = new BaseDiLocalServiceFile(
+                rootPath,
+                'base_di_local_service'
+            );
+            const baseManageDatabaseFile = new BaseManageDatabaseFile(
+                rootPath,
+                'base_manage_database'
+            );
+            const localServiceServiceLocatorFile =
+                new LocalServiceServiceLocatorFile(
+                    rootPath,
+                    'di_local_service'
+                );
+            const banageDatabaseFile = new ManageDatabaseFile(
+                rootPath,
+                'manage_database'
+            );
 
             appDatabaseFile.create();
             appSecureStorageFile.create();
@@ -193,11 +227,10 @@ export function activate(context: vscode.ExtensionContext) {
         }
     );
 
-
     context.subscriptions.push(modelDisposable);
     context.subscriptions.push(styleDisposable);
     context.subscriptions.push(appDisposable);
     context.subscriptions.push(serviceDisposable);
 }
 
-export function deactivate() { }
+export function deactivate() {}

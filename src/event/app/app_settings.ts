@@ -1,5 +1,4 @@
 import * as path from 'path';
-import * as _ from 'lodash';
 import { YamlHelper } from '../../utility/yaml_helper';
 import { BaseFile } from '../base/base';
 import { AppSettings } from '../../template/app/app_settings';

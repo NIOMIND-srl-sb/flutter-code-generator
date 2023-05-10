@@ -1,11 +1,11 @@
 import { BaseTemplate } from '../../base/base';
 
 export class AppSecureStorage extends BaseTemplate {
-  private _dartString: string;
+    private _dartString: string;
 
-  constructor(fileName: string, suffix: string) {
-    super(fileName, suffix);
-    this._dartString = `import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+    constructor(fileName: string, suffix: string) {
+        super(fileName, suffix);
+        this._dartString = `import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import '../base/base_app_secure_storage.dart';
 
 class AppSecureStorage extends BaseAppSecureStorage {
@@ -46,9 +46,9 @@ class AppSecureStorage extends BaseAppSecureStorage {
     await secureStorage.write(key: key, value: value);
   }
 }`;
-  }
+    }
 
-  get dartString(): string {
-    return this._dartString;
-  }
+    get dartString(): string {
+        return this._dartString;
+    }
 }

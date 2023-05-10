@@ -1,11 +1,11 @@
 import { BaseTemplate } from '../../base/base';
 
 export class BaseDatabase extends BaseTemplate {
-  private _dartString: string;
+    private _dartString: string;
 
-  constructor(fileName: string, suffix: string) {
-    super(fileName, suffix);
-    this._dartString = `abstract class BaseDatabase {
+    constructor(fileName: string, suffix: string) {
+        super(fileName, suffix);
+        this._dartString = `abstract class BaseDatabase {
   bool get isOpen;
   String get foreignKeysON;
   String get databaseName;
@@ -28,9 +28,9 @@ export class BaseDatabase extends BaseTemplate {
 
   Future<void> close();
 }`;
-  }
+    }
 
-  get dartString(): string {
-    return this._dartString;
-  }
+    get dartString(): string {
+        return this._dartString;
+    }
 }

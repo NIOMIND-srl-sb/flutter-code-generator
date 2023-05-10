@@ -1,11 +1,11 @@
 import { BaseTemplate } from '../../base/base';
 
 export class AppDatabase extends BaseTemplate {
-  private _dartString: string;
+    private _dartString: string;
 
-  constructor(fileName: string, suffix: string) {
-    super(fileName, suffix);
-    this._dartString = `import 'dart:async';
+    constructor(fileName: string, suffix: string) {
+        super(fileName, suffix);
+        this._dartString = `import 'dart:async';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 import '../base/base_app_database.dart';
@@ -237,9 +237,9 @@ class AppDatabase extends BaseDatabase with BaseAppDatabase {
   }
 }
 `;
-  }
+    }
 
-  get dartString(): string {
-    return this._dartString;
-  }
+    get dartString(): string {
+        return this._dartString;
+    }
 }

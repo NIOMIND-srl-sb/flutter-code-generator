@@ -1,5 +1,4 @@
 import * as path from 'path';
-import * as _ from 'lodash';
 import { YamlHelper } from '../../../utility/yaml_helper';
 import { BaseDatabase } from '../../../template/service/local/base_database';
 import { BaseFile } from '../../base/base';
@@ -12,7 +11,14 @@ export class BaseDatabaseFile extends BaseFile {
 
     get pathValue(): string {
         if (this.folders === undefined) {
-            return path.join(this.rootPath, 'lib', 'src', 'service', 'local', 'base');
+            return path.join(
+                this.rootPath,
+                'lib',
+                'src',
+                'service',
+                'local',
+                'base'
+            );
         }
         return path.join(
             this.rootPath,

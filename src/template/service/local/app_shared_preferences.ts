@@ -1,11 +1,11 @@
 import { BaseTemplate } from '../../base/base';
 
 export class AppSharedPreferences extends BaseTemplate {
-  private _dartString: string;
+    private _dartString: string;
 
-  constructor(fileName: string, suffix: string) {
-    super(fileName, suffix);
-    this._dartString = `import 'package:shared_preferences/shared_preferences.dart';
+    constructor(fileName: string, suffix: string) {
+        super(fileName, suffix);
+        this._dartString = `import 'package:shared_preferences/shared_preferences.dart';
 import '../base/base_app_shared_preferences.dart';
 
 class AppSharedPreferences extends BaseAppSharedPreferences {
@@ -82,9 +82,9 @@ class AppSharedPreferences extends BaseAppSharedPreferences {
     return await prefs.remove(key);
   }
 }`;
-  }
+    }
 
-  get dartString(): string {
-    return this._dartString;
-  }
+    get dartString(): string {
+        return this._dartString;
+    }
 }

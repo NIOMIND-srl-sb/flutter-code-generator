@@ -1,11 +1,11 @@
 import { BaseTemplate } from '../../base/base';
 
 export class BaseAppDatabase extends BaseTemplate {
-  private _dartString: string;
+    private _dartString: string;
 
-  constructor(fileName: string, suffix: string) {
-    super(fileName, suffix);
-    this._dartString = `abstract class BaseAppDatabase {
+    constructor(fileName: string, suffix: string) {
+        super(fileName, suffix);
+        this._dartString = `abstract class BaseAppDatabase {
   Future<int> insertData({
     required String tableName,
     required Map<String, dynamic> item,
@@ -64,9 +64,9 @@ export class BaseAppDatabase extends BaseTemplate {
   });
 }
 `;
-  }
+    }
 
-  get dartString(): string {
-    return this._dartString;
-  }
+    get dartString(): string {
+        return this._dartString;
+    }
 }

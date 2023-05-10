@@ -1,11 +1,11 @@
 import { BaseTemplate } from '../../base/base';
 
 export class LocalServiceServiceLocator extends BaseTemplate {
-  private _dartString: string;
+    private _dartString: string;
 
-  constructor(fileName: string, suffix: string) {
-    super(fileName, suffix);
-    this._dartString = `import '../base/base_di_local_service.dart';
+    constructor(fileName: string, suffix: string) {
+        super(fileName, suffix);
+        this._dartString = `import '../base/base_di_local_service.dart';
 import '../database/app_database.dart';
 
 class LocalServiceServiceLocator implements BaseLocalServiceServiceLocator {
@@ -16,9 +16,9 @@ class LocalServiceServiceLocator implements BaseLocalServiceServiceLocator {
     return AppDatabase.db;
   }
 }`;
-  }
+    }
 
-  get dartString(): string {
-    return this._dartString;
-  }
+    get dartString(): string {
+        return this._dartString;
+    }
 }
