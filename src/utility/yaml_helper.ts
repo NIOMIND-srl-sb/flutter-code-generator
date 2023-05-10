@@ -29,6 +29,39 @@ export class YamlHelper {
             };
             haveToUpdate = true;
         }
+
+        const sharedPreferencesVersion = '^2.1.1';
+        const sharedPreferences = this.getSharedPreferences(object);
+        AppLogger.debug(`sharedPreferences: ${sharedPreferences}`);
+        if (sharedPreferences === undefined) {
+            object['dependencies']['shared_preferences'] = sharedPreferencesVersion;
+            haveToUpdate = true;
+        }
+
+        const flutterSecureStorageVersion = '^8.0.0';
+        const flutterSecureStorage = this.getFlutterSecureStorage(object);
+        AppLogger.debug(`flutterSecureStorage: ${flutterSecureStorage}`);
+        if (flutterSecureStorage === undefined) {
+            object['dependencies']['flutter_secure_storage'] = flutterSecureStorageVersion;
+            haveToUpdate = true;
+        }
+
+        const sqfliteVersion = '^2.2.8+2';
+        const sqflite = this.getSqflite(object);
+        AppLogger.debug(`sqflite: ${sqflite}`);
+        if (sharedPreferences === undefined) {
+            object['dependencies']['sqflite'] = sqfliteVersion;
+            haveToUpdate = true;
+        }
+
+        const pathPackageVersion = '^1.8.2';
+        const pathPackage = this.getPathPackage(object);
+        AppLogger.debug(`pathPackage: ${pathPackage}`);
+        if (sharedPreferences === undefined) {
+            object['dependencies']['path'] = pathPackageVersion;
+            haveToUpdate = true;
+        }
+
         if (haveToUpdate) {
             this.addDependencyToPubspec(object);
         }
@@ -69,6 +102,22 @@ export class YamlHelper {
 
     public static getFlutterLocalizations(object: any): string | undefined {
         return object['dependencies']['flutter_localizations'];
+    }
+
+    public static getSharedPreferences(object: any): string | undefined {
+        return object['dependencies']['shared_preferences'];
+    }
+
+    public static getSqflite(object: any): string | undefined {
+        return object['dependencies']['sqflite'];
+    }
+
+    public static getFlutterSecureStorage(object: any): string | undefined {
+        return object['dependencies']['flutter_secure_storage'];
+    }
+
+    public static getPathPackage(object: any): string | undefined {
+        return object['dependencies']['path'];
     }
 
     private static addDependencyToPubspec(object: any) {
