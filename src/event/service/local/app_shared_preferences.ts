@@ -1,9 +1,9 @@
 import * as path from 'path';
-import { YamlHelper } from '../../utility/yaml_helper';
-import { BaseModel } from '../../template/model/base_model';
-import { BaseFile } from '../base/base';
+import { YamlHelper } from '../../../utility/yaml_helper';
+import { AppSharedPreferences } from '../../../template/service/local/app_shared_preferences';
+import { BaseFile } from '../../base/base';
 
-export class BaseModelFile extends BaseFile {
+export class AppSharedPreferencesFile extends BaseFile {
     constructor(rootPath: string, fileName: string, folders?: string[]) {
         super(rootPath, fileName, folders);
         this.createFolder();
@@ -11,20 +11,28 @@ export class BaseModelFile extends BaseFile {
 
     get pathValue(): string {
         if (this.folders === undefined) {
-            return path.join(this.rootPath, 'lib', 'src', 'model', 'base');
+            return path.join(
+                this.rootPath,
+                'lib',
+                'src',
+                'service',
+                'local',
+                'database'
+            );
         }
         return path.join(
             this.rootPath,
             'lib',
             'src',
-            'model',
-            'base',
+            'service',
+            'local',
+            'database',
             ...this.folders
         );
     }
 
     create(): void {
-        const baseModel = new BaseModel(this.getFileName, 'Model');
+        const baseModel = new AppSharedPreferences(this.getFileName, '');
         this.createFiles(
             this.pathValue,
             this.getFileName,

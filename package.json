@@ -12,7 +12,8 @@
     "activationEvents": [
         "onCommand:extension.createModel",
         "onCommand:extension.createStyle",
-        "onCommand:extension.createApp"
+        "onCommand:extension.createApp",
+        "onCommand:extension.createServiceLocal"
     ],
     "main": "./out/extension.js",
     "contributes": {
@@ -31,21 +32,30 @@
                 "command": "flutter-code-generator.createApp",
                 "title": "Create App file",
                 "category": "Flutter Architecture"
+            },
+            {
+                "command": "flutter-code-generator.createServiceLocal",
+                "title": "Create Service Local file",
+                "category": "Flutter Architecture"
             }
         ],
         "menus": {
             "explorer/context": [
                 {
                     "command": "flutter-code-generator.createModel",
-                    "group": "1_flutter_code_generatoer"
+                    "group": "1_flutter_code_generator"
                 },
                 {
                     "command": "flutter-code-generator.createStyle",
-                    "group": "1_flutter_code_generatoer"
+                    "group": "1_flutter_code_generator"
                 },
                 {
                     "command": "flutter-code-generator.createApp",
-                    "group": "1_flutter_code_generatoer"
+                    "group": "1_flutter_code_generator"
+                },
+                {
+                    "command": "flutter-code-generator.createServiceLocal",
+                    "group": "1_flutter_code_generator"
                 }
             ]
         }
