@@ -31,6 +31,10 @@ import { BaseDiLocalServiceFile } from './event/service/local/base_di_local_serv
 import { BaseManageDatabaseFile } from './event/service/local/base_manage_database';
 import { LocalServiceServiceLocatorFile } from './event/service/local/di_local_service';
 import { ManageDatabaseFile } from './event/service/local/manage_database';
+import { FirebaseAppAuthFile } from './event/service/auth/firebase_app_auth';
+import { UserModelFile } from './event/model/user_model';
+import { AppLoggerFile } from './event/utility/app_logger';
+import { BaseAppAuthFile } from './event/service/base/base_app_auth';
 
 export function activate(context: vscode.ExtensionContext) {
     const modelDisposable = vscode.commands.registerCommand(
@@ -227,10 +231,91 @@ export function activate(context: vscode.ExtensionContext) {
         }
     );
 
+    const firebaseAppAuthDisposable = vscode.commands.registerCommand(
+        'flutter-code-generator.createServiceFirebaseAuthentication',
+        async () => {
+            const rootPath = VsCodeActions.rootPath;
+            if (rootPath === undefined) {
+                return;
+            }
+
+            const appAuthFile = new FirebaseAppAuthFile(
+                rootPath,
+                'app_auth'
+            );
+
+            const userModelFile = new UserModelFile(
+                rootPath,
+                'user'
+            );
+
+            const baseAppAuthFile = new BaseAppAuthFile(
+                rootPath,
+                'base_app_auth'
+            );
+            
+            const baseModelFile = new BaseModelFile(rootPath, 'base_model');
+            const isExistBaseModelFile = FileSystemManager.doesFileExist(
+                baseModelFile.pathValue,
+                baseModelFile.getFileName
+            );
+
+            const appLoggerFile = new AppLoggerFile(rootPath, 'app_logger');
+            const isExistAppLoggerFile = FileSystemManager.doesFileExist(
+                appLoggerFile.pathValue,
+                appLoggerFile.getFileName
+            );
+
+            if (!isExistBaseModelFile) {
+                baseModelFile.create();
+            }
+            if (!isExistAppLoggerFile) {
+                appLoggerFile.create();
+            }
+            userModelFile.create();
+            baseAppAuthFile.create();
+            appAuthFile.create();
+
+            AppLogger.info('AppAuth folder created successfully');
+        }
+    );
+
+    const userModelDisposable = vscode.commands.registerCommand(
+        'flutter-code-generator.createUserModel',
+        async () => {
+            const rootPath = VsCodeActions.rootPath;
+            if (rootPath === undefined) {
+                return;
+            }
+
+            const userModelFile = new UserModelFile(
+                rootPath,
+                'user'
+            );
+            
+            const baseModelFile = new BaseModelFile(rootPath, 'base_model');
+            const isExistBaseModelFile = FileSystemManager.doesFileExist(
+                baseModelFile.pathValue,
+                baseModelFile.getFileName
+            );
+
+
+            if (!isExistBaseModelFile) {
+                baseModelFile.create();
+            }
+
+            userModelFile.create();
+
+            AppLogger.info('UserModel folder created successfully');
+        }
+    );
+
     context.subscriptions.push(modelDisposable);
     context.subscriptions.push(styleDisposable);
     context.subscriptions.push(appDisposable);
     context.subscriptions.push(serviceDisposable);
+    context.subscriptions.push(firebaseAppAuthDisposable);
+    context.subscriptions.push(userModelDisposable);
 }
 
 export function deactivate() {}
