@@ -88,6 +88,39 @@ export class YamlHelper {
             haveToUpdate = true;
         }
 
+        const loggerPackageVersion = '^1.3.0';
+        const loggerPackage = this.getLoggerPackage(object);
+        AppLogger.debug(`loggerPackage: ${loggerPackage}`);
+        if (loggerPackage === undefined) {
+            object['dependencies']['logger'] = loggerPackageVersion;
+            haveToUpdate = true;
+        }
+
+        const firebaseCrashlyticsVersion = '^3.2.0';
+        const firebaseCrashlytics = this.getFirebaseCrashlytics(object);
+        AppLogger.debug(`firebaseCrashlytics: ${firebaseCrashlytics}`);
+        if (firebaseCrashlytics === undefined) {
+            object['dependencies']['firebase_crashlytics'] =
+                firebaseCrashlyticsVersion;
+            haveToUpdate = true;
+        }
+
+        const firebaseAuthVersion = '^4.5.0';
+        const firebaseAuth = this.getFirebaseAuth(object);
+        AppLogger.debug(`firebaseCrashlytics: ${firebaseAuth}`);
+        if (firebaseAuth === undefined) {
+            object['dependencies']['firebase_auth'] = firebaseAuthVersion;
+            haveToUpdate = true;
+        }
+
+        const googleSignInVersion = '^6.1.0';
+        const googleSignIn = this.getGoogleSignIn(object);
+        AppLogger.debug(`googleSignIn: ${googleSignIn}`);
+        if (googleSignIn === undefined) {
+            object['dependencies']['google_sign_in'] = googleSignInVersion;
+            haveToUpdate = true;
+        }
+
         if (haveToUpdate) {
             this.addDependencyToPubspec(object);
         }
@@ -156,6 +189,22 @@ export class YamlHelper {
 
     private static getFirebaseStorage(object: any): string | undefined {
         return object['dependencies']['firebase_storage'];
+    }
+
+    private static getFirebaseCrashlytics(object: any): string | undefined {
+        return object['dependencies']['firebase_crashlytics'];
+    }
+
+    private static getLoggerPackage(object: any): string | undefined {
+        return object['dependencies']['logger'];
+    }
+
+    private static getFirebaseAuth(object: any): string | undefined {
+        return object['dependencies']['firebase_auth'];
+    }
+
+    private static getGoogleSignIn(object: any): string | undefined {
+        return object['dependencies']['google_sign_in'];
     }
 
     private static addDependencyToPubspec(object: any) {

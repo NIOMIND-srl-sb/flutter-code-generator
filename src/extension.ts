@@ -39,6 +39,10 @@ import { DiRemoteServiceFile } from './event/service/remote/di/di_remote_service
 import { AppFirestoreFile } from './event/service/remote/firestore/app_firestore';
 import { AppFunctionsFile } from './event/service/remote/functions/app_functions';
 import { AppStorageFile } from './event/service/remote/storage/app_storage';
+import { FirebaseAppAuthFile } from './event/service/auth/firebase_app_auth';
+import { UserModelFile } from './event/model/user_model';
+import { AppLoggerFile } from './event/utility/app_logger';
+import { BaseAppAuthFile } from './event/service/base/base_app_auth';
 
 export function activate(context: vscode.ExtensionContext) {
     const modelDisposable = vscode.commands.registerCommand(
@@ -271,11 +275,8 @@ export function activate(context: vscode.ExtensionContext) {
                 rootPath,
                 'app_functions'
             );
-            const appStorageFile = new AppStorageFile(
-                rootPath,
-                'app_storage'
-            );
-    
+            const appStorageFile = new AppStorageFile(rootPath, 'app_storage');
+
             baseAppFirestore.create();
             baseAppFunctions.create();
             baseAppStorageFile.create();
@@ -285,7 +286,78 @@ export function activate(context: vscode.ExtensionContext) {
             appFuntcionsFile.create();
             appStorageFile.create();
 
-            AppLogger.info('Remote firebase service folder created successfully');
+            AppLogger.info(
+                'Remote firebase service folder created successfully'
+            );
+        }
+    );
+
+    const firebaseAppAuthDisposable = vscode.commands.registerCommand(
+        'flutter-code-generator.createServiceFirebaseAuthentication',
+        async () => {
+            const rootPath = VsCodeActions.rootPath;
+            if (rootPath === undefined) {
+                return;
+            }
+
+            const appAuthFile = new FirebaseAppAuthFile(rootPath, 'app_auth');
+
+            const userModelFile = new UserModelFile(rootPath, 'user');
+
+            const baseAppAuthFile = new BaseAppAuthFile(
+                rootPath,
+                'base_app_auth'
+            );
+
+            const baseModelFile = new BaseModelFile(rootPath, 'base_model');
+            const isExistBaseModelFile = FileSystemManager.doesFileExist(
+                baseModelFile.pathValue,
+                baseModelFile.getFileName
+            );
+
+            const appLoggerFile = new AppLoggerFile(rootPath, 'app_logger');
+            const isExistAppLoggerFile = FileSystemManager.doesFileExist(
+                appLoggerFile.pathValue,
+                appLoggerFile.getFileName
+            );
+
+            if (!isExistBaseModelFile) {
+                baseModelFile.create();
+            }
+            if (!isExistAppLoggerFile) {
+                appLoggerFile.create();
+            }
+            userModelFile.create();
+            baseAppAuthFile.create();
+            appAuthFile.create();
+
+            AppLogger.info('AppAuth folder created successfully');
+        }
+    );
+
+    const userModelDisposable = vscode.commands.registerCommand(
+        'flutter-code-generator.createUserModel',
+        async () => {
+            const rootPath = VsCodeActions.rootPath;
+            if (rootPath === undefined) {
+                return;
+            }
+
+            const userModelFile = new UserModelFile(rootPath, 'user');
+
+            const baseModelFile = new BaseModelFile(rootPath, 'base_model');
+            const isExistBaseModelFile = FileSystemManager.doesFileExist(
+                baseModelFile.pathValue,
+                baseModelFile.getFileName
+            );
+
+            if (!isExistBaseModelFile) {
+                baseModelFile.create();
+            }
+
+            userModelFile.create();
+
+            AppLogger.info('UserModel folder created successfully');
         }
     );
 
@@ -293,6 +365,9 @@ export function activate(context: vscode.ExtensionContext) {
     context.subscriptions.push(styleDisposable);
     context.subscriptions.push(appDisposable);
     context.subscriptions.push(serviceDisposable);
+    context.subscriptions.push(serviceRemoteFirebaseDisposable);
+    context.subscriptions.push(firebaseAppAuthDisposable);
+    context.subscriptions.push(userModelDisposable);
 }
 
 export function deactivate() {}

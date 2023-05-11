@@ -14,7 +14,9 @@
         "onCommand:extension.createStyle",
         "onCommand:extension.createApp",
         "onCommand:extension.createServiceLocal",
-        "onCommand:extension.createServiceRemoteFirebase"
+        "onCommand:extension.createServiceRemoteFirebase",
+        "onCommand:extension.createServiceFirebaseAuthentication",
+        "onCommand:extension.createUserModel"
     ],
     "main": "./out/extension.js",
     "contributes": {
@@ -36,7 +38,17 @@
             },
             {
                 "command": "flutter-code-generator.createServiceLocal",
-                "title": "Create Service Local file",
+                "title": "Create Service Local files",
+                "category": "Flutter Architecture"
+            },
+            {
+                "command": "flutter-code-generator.createServiceFirebaseAuthentication",
+                "title": "Create Service Firebase Authentication files",
+                "category": "Flutter Architecture"
+            },
+            {
+                "command": "flutter-code-generator.createUserModel",
+                "title": "Create User Model file",
                 "category": "Flutter Architecture"
             },
             {
@@ -65,6 +77,14 @@
                 },
                 {
                     "command": "flutter-code-generator.createServiceRemoteFirebase",
+                    "group": "1_flutter_code_generator"
+                },
+                {
+                    "command": "flutter-code-generator.createServiceFirebaseAuthentication",
+                    "group": "1_flutter_code_generator"
+                },
+                {
+                    "command": "flutter-code-generator.createUserModel",
                     "group": "1_flutter_code_generator"
                 }
             ]
