@@ -51,7 +51,7 @@ export class YamlHelper {
         const sqfliteVersion = '^2.2.8+2';
         const sqflite = this.getSqflite(object);
         AppLogger.debug(`sqflite: ${sqflite}`);
-        if (sharedPreferences === undefined) {
+        if (sqflite === undefined) {
             object['dependencies']['sqflite'] = sqfliteVersion;
             haveToUpdate = true;
         }
@@ -59,8 +59,40 @@ export class YamlHelper {
         const pathPackageVersion = '^1.8.2';
         const pathPackage = this.getPathPackage(object);
         AppLogger.debug(`pathPackage: ${pathPackage}`);
-        if (sharedPreferences === undefined) {
+        if (pathPackage === undefined) {
             object['dependencies']['path'] = pathPackageVersion;
+            haveToUpdate = true;
+        }
+
+        const loggerPackageVersion = '^1.3.0';
+        const loggerPackage = this.getLoggerPackage(object);
+        AppLogger.debug(`loggerPackage: ${loggerPackage}`);
+        if (loggerPackage === undefined) {
+            object['dependencies']['logger'] = loggerPackageVersion;
+            haveToUpdate = true;
+        }
+
+        const firebaseCrashlyticsVersion = '^3.2.0';
+        const firebaseCrashlytics = this.getFirebaseCrashlytics(object);
+        AppLogger.debug(`firebaseCrashlytics: ${firebaseCrashlytics}`);
+        if (firebaseCrashlytics === undefined) {
+            object['dependencies']['firebase_crashlytics'] = firebaseCrashlyticsVersion;
+            haveToUpdate = true;
+        }
+
+        const firebaseAuthVersion = '^4.5.0';
+        const firebaseAuth = this.getFirebaseAuth(object);
+        AppLogger.debug(`firebaseCrashlytics: ${firebaseAuth}`);
+        if (firebaseAuth === undefined) {
+            object['dependencies']['firebase_auth'] = firebaseAuthVersion;
+            haveToUpdate = true;
+        }
+
+        const googleSignInVersion = '^6.1.0';
+        const googleSignIn = this.getGoogleSignIn(object);
+        AppLogger.debug(`googleSignIn: ${googleSignIn}`);
+        if (googleSignIn === undefined) {
+            object['dependencies']['google_sign_in'] = googleSignInVersion;
             haveToUpdate = true;
         }
 
@@ -120,6 +152,22 @@ export class YamlHelper {
 
     private static getPathPackage(object: any): string | undefined {
         return object['dependencies']['path'];
+    }
+
+    private static getFirebaseCrashlytics(object: any): string | undefined {
+        return object['dependencies']['firebase_crashlytics'];
+    }
+
+    private static getLoggerPackage(object: any): string | undefined {
+        return object['dependencies']['logger'];
+    }
+
+    private static getFirebaseAuth(object: any): string | undefined {
+        return object['dependencies']['firebase_auth'];
+    }
+
+    private static getGoogleSignIn(object: any): string | undefined {
+        return object['dependencies']['google_sign_in'];
     }
 
     private static addDependencyToPubspec(object: any) {
