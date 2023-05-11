@@ -98,27 +98,27 @@ export class YamlHelper {
         return object['name'];
     }
 
-    public static getProvider(object: any): string | undefined {
+    private static getProvider(object: any): string | undefined {
         return object['dependencies']['provider'];
     }
 
-    public static getFlutterLocalizations(object: any): string | undefined {
+    private static getFlutterLocalizations(object: any): string | undefined {
         return object['dependencies']['flutter_localizations'];
     }
 
-    public static getSharedPreferences(object: any): string | undefined {
+    private static getSharedPreferences(object: any): string | undefined {
         return object['dependencies']['shared_preferences'];
     }
 
-    public static getSqflite(object: any): string | undefined {
+    private static getSqflite(object: any): string | undefined {
         return object['dependencies']['sqflite'];
     }
 
-    public static getFlutterSecureStorage(object: any): string | undefined {
+    private static getFlutterSecureStorage(object: any): string | undefined {
         return object['dependencies']['flutter_secure_storage'];
     }
 
-    public static getPathPackage(object: any): string | undefined {
+    private static getPathPackage(object: any): string | undefined {
         return object['dependencies']['path'];
     }
 
@@ -135,7 +135,7 @@ export class YamlHelper {
     }
 
     private static upgradeDartVersion(object: any) {
-        object['environment']['sdk'] = '>=2.19.6 <3.0.0';
+        object['environment']['sdk'] = '>=3.0.0 <4.0.0';
         const modifiedString = JSON.stringify(object);
         AppLogger.debug(
             `upgradeDartVersion: modifiledString: ${modifiedString}`
