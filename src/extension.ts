@@ -31,6 +31,14 @@ import { BaseDiLocalServiceFile } from './event/service/local/base_di_local_serv
 import { BaseManageDatabaseFile } from './event/service/local/base_manage_database';
 import { LocalServiceServiceLocatorFile } from './event/service/local/di_local_service';
 import { ManageDatabaseFile } from './event/service/local/manage_database';
+import { BaseAppFirestoreFile } from './event/service/remote/base/base_app_firestore';
+import { BaseAppFunctionsFile } from './event/service/remote/base/base_app_functions';
+import { BaseAppStorageFile } from './event/service/remote/base/base_app_storage';
+import { BaseDiRemoteServiceFile } from './event/service/remote/base/base_di_remote_service';
+import { DiRemoteServiceFile } from './event/service/remote/di/di_remote_service';
+import { AppFirestoreFile } from './event/service/remote/firestore/app_firestore';
+import { AppFunctionsFile } from './event/service/remote/functions/app_functions';
+import { AppStorageFile } from './event/service/remote/storage/app_storage';
 
 export function activate(context: vscode.ExtensionContext) {
     const modelDisposable = vscode.commands.registerCommand(
@@ -224,6 +232,60 @@ export function activate(context: vscode.ExtensionContext) {
             banageDatabaseFile.create();
 
             AppLogger.info('Service folder created successfully');
+        }
+    );
+
+    const serviceRemoteFirebaseDisposable = vscode.commands.registerCommand(
+        'flutter-code-generator.createServiceRemoteFirebase',
+        async () => {
+            const rootPath = VsCodeActions.rootPath;
+            if (rootPath === undefined) {
+                return;
+            }
+
+            const baseAppFirestore = new BaseAppFirestoreFile(
+                rootPath,
+                'base_app_firestore'
+            );
+            const baseAppFunctions = new BaseAppFunctionsFile(
+                rootPath,
+                'base_app_functions'
+            );
+            const baseAppStorageFile = new BaseAppStorageFile(
+                rootPath,
+                'base_app_storage'
+            );
+            const baseDiRemoteServiceFile = new BaseDiRemoteServiceFile(
+                rootPath,
+                'base_di_remote_service'
+            );
+            const diRemoteServiceFile = new DiRemoteServiceFile(
+                rootPath,
+                'di_remote_service'
+            );
+            const appFirestoreFile = new AppFirestoreFile(
+                rootPath,
+                'app_firestore'
+            );
+            const appFuntcionsFile = new AppFunctionsFile(
+                rootPath,
+                'app_functions'
+            );
+            const appStorageFile = new AppStorageFile(
+                rootPath,
+                'app_storage'
+            );
+    
+            baseAppFirestore.create();
+            baseAppFunctions.create();
+            baseAppStorageFile.create();
+            baseDiRemoteServiceFile.create();
+            diRemoteServiceFile.create();
+            appFirestoreFile.create();
+            appFuntcionsFile.create();
+            appStorageFile.create();
+
+            AppLogger.info('Remote firebase service folder created successfully');
         }
     );
 
