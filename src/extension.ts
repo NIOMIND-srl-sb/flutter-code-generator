@@ -31,6 +31,14 @@ import { BaseDiLocalServiceFile } from './event/service/local/base_di_local_serv
 import { BaseManageDatabaseFile } from './event/service/local/base_manage_database';
 import { LocalServiceServiceLocatorFile } from './event/service/local/di_local_service';
 import { ManageDatabaseFile } from './event/service/local/manage_database';
+import { BaseAppFirestoreFile } from './event/service/remote/base/base_app_firestore';
+import { BaseAppFunctionsFile } from './event/service/remote/base/base_app_functions';
+import { BaseAppStorageFile } from './event/service/remote/base/base_app_storage';
+import { BaseDiRemoteServiceFile } from './event/service/remote/base/base_di_remote_service';
+import { DiRemoteServiceFile } from './event/service/remote/di/di_remote_service';
+import { AppFirestoreFile } from './event/service/remote/firestore/app_firestore';
+import { AppFunctionsFile } from './event/service/remote/functions/app_functions';
+import { AppStorageFile } from './event/service/remote/storage/app_storage';
 import { FirebaseAppAuthFile } from './event/service/auth/firebase_app_auth';
 import { UserModelFile } from './event/model/user_model';
 import { AppLoggerFile } from './event/utility/app_logger';
@@ -160,7 +168,7 @@ export function activate(context: vscode.ExtensionContext) {
         }
     );
 
-    const serviceDisposable = vscode.commands.registerCommand(
+    const serviceLocalDisposable = vscode.commands.registerCommand(
         'flutter-code-generator.createServiceLocal',
         async () => {
             const rootPath = VsCodeActions.rootPath;
@@ -231,6 +239,59 @@ export function activate(context: vscode.ExtensionContext) {
         }
     );
 
+    const serviceRemoteFirebaseDisposable = vscode.commands.registerCommand(
+        'flutter-code-generator.createServiceRemoteFirebase',
+        async () => {
+            const rootPath = VsCodeActions.rootPath;
+            if (rootPath === undefined) {
+                return;
+            }
+
+            const baseAppFirestore = new BaseAppFirestoreFile(
+                rootPath,
+                'base_app_firestore'
+            );
+            const baseAppFunctions = new BaseAppFunctionsFile(
+                rootPath,
+                'base_app_functions'
+            );
+            const baseAppStorageFile = new BaseAppStorageFile(
+                rootPath,
+                'base_app_storage'
+            );
+            const baseDiRemoteServiceFile = new BaseDiRemoteServiceFile(
+                rootPath,
+                'base_di_remote_service'
+            );
+            const diRemoteServiceFile = new DiRemoteServiceFile(
+                rootPath,
+                'di_remote_service'
+            );
+            const appFirestoreFile = new AppFirestoreFile(
+                rootPath,
+                'app_firestore'
+            );
+            const appFuntcionsFile = new AppFunctionsFile(
+                rootPath,
+                'app_functions'
+            );
+            const appStorageFile = new AppStorageFile(rootPath, 'app_storage');
+
+            baseAppFirestore.create();
+            baseAppFunctions.create();
+            baseAppStorageFile.create();
+            baseDiRemoteServiceFile.create();
+            diRemoteServiceFile.create();
+            appFirestoreFile.create();
+            appFuntcionsFile.create();
+            appStorageFile.create();
+
+            AppLogger.info(
+                'Remote firebase service folder created successfully'
+            );
+        }
+    );
+
     const firebaseAppAuthDisposable = vscode.commands.registerCommand(
         'flutter-code-generator.createServiceFirebaseAuthentication',
         async () => {
@@ -239,21 +300,15 @@ export function activate(context: vscode.ExtensionContext) {
                 return;
             }
 
-            const appAuthFile = new FirebaseAppAuthFile(
-                rootPath,
-                'app_auth'
-            );
+            const appAuthFile = new FirebaseAppAuthFile(rootPath, 'app_auth');
 
-            const userModelFile = new UserModelFile(
-                rootPath,
-                'user'
-            );
+            const userModelFile = new UserModelFile(rootPath, 'user');
 
             const baseAppAuthFile = new BaseAppAuthFile(
                 rootPath,
                 'base_app_auth'
             );
-            
+
             const baseModelFile = new BaseModelFile(rootPath, 'base_model');
             const isExistBaseModelFile = FileSystemManager.doesFileExist(
                 baseModelFile.pathValue,
@@ -288,17 +343,13 @@ export function activate(context: vscode.ExtensionContext) {
                 return;
             }
 
-            const userModelFile = new UserModelFile(
-                rootPath,
-                'user'
-            );
-            
+            const userModelFile = new UserModelFile(rootPath, 'user');
+
             const baseModelFile = new BaseModelFile(rootPath, 'base_model');
             const isExistBaseModelFile = FileSystemManager.doesFileExist(
                 baseModelFile.pathValue,
                 baseModelFile.getFileName
             );
-
 
             if (!isExistBaseModelFile) {
                 baseModelFile.create();
@@ -313,7 +364,8 @@ export function activate(context: vscode.ExtensionContext) {
     context.subscriptions.push(modelDisposable);
     context.subscriptions.push(styleDisposable);
     context.subscriptions.push(appDisposable);
-    context.subscriptions.push(serviceDisposable);
+    context.subscriptions.push(serviceLocalDisposable);
+    context.subscriptions.push(serviceRemoteFirebaseDisposable);
     context.subscriptions.push(firebaseAppAuthDisposable);
     context.subscriptions.push(userModelDisposable);
 }
