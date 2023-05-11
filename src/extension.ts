@@ -168,7 +168,7 @@ export function activate(context: vscode.ExtensionContext) {
         }
     );
 
-    const serviceDisposable = vscode.commands.registerCommand(
+    const serviceLocalDisposable = vscode.commands.registerCommand(
         'flutter-code-generator.createServiceLocal',
         async () => {
             const rootPath = VsCodeActions.rootPath;
@@ -364,7 +364,7 @@ export function activate(context: vscode.ExtensionContext) {
     context.subscriptions.push(modelDisposable);
     context.subscriptions.push(styleDisposable);
     context.subscriptions.push(appDisposable);
-    context.subscriptions.push(serviceDisposable);
+    context.subscriptions.push(serviceLocalDisposable);
     context.subscriptions.push(serviceRemoteFirebaseDisposable);
     context.subscriptions.push(firebaseAppAuthDisposable);
     context.subscriptions.push(userModelDisposable);
