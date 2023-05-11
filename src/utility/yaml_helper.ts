@@ -51,7 +51,7 @@ export class YamlHelper {
         const sqfliteVersion = '^2.2.8+2';
         const sqflite = this.getSqflite(object);
         AppLogger.debug(`sqflite: ${sqflite}`);
-        if (sharedPreferences === undefined) {
+        if (sqflite === undefined) {
             object['dependencies']['sqflite'] = sqfliteVersion;
             haveToUpdate = true;
         }
@@ -59,8 +59,32 @@ export class YamlHelper {
         const pathPackageVersion = '^1.8.2';
         const pathPackage = this.getPathPackage(object);
         AppLogger.debug(`pathPackage: ${pathPackage}`);
-        if (sharedPreferences === undefined) {
+        if (pathPackage === undefined) {
             object['dependencies']['path'] = pathPackageVersion;
+            haveToUpdate = true;
+        }
+
+        const cloudFirestoreVersion = '^4.6.0';
+        const cloudFirestore = this.getCloudFirestore(object);
+        AppLogger.debug(`cloudFirestore: ${cloudFirestore}`);
+        if (cloudFirestore === undefined) {
+            object['dependencies']['cloud_firestore'] = cloudFirestoreVersion;
+            haveToUpdate = true;
+        }
+
+        const cloudFunctionsVersion = '^4.2.0';
+        const cloudFunctions = this.getCloudFunctions(object);
+        AppLogger.debug(`cloudFunctions: ${cloudFunctions}`);
+        if (cloudFunctions === undefined) {
+            object['dependencies']['cloud_functions'] = cloudFunctionsVersion;
+            haveToUpdate = true;
+        }
+
+        const firebaseStorageVersion = '^11.1.2';
+        const firebaseStorage = this.getFirebaseStorage(object);
+        AppLogger.debug(`firebaseStorage: ${firebaseStorage}`);
+        if (firebaseStorage === undefined) {
+            object['dependencies']['firebase_storage'] = firebaseStorageVersion;
             haveToUpdate = true;
         }
 
@@ -120,6 +144,18 @@ export class YamlHelper {
 
     private static getPathPackage(object: any): string | undefined {
         return object['dependencies']['path'];
+    }
+
+    private static getCloudFirestore(object: any): string | undefined {
+        return object['dependencies']['cloud_firestore'];
+    }
+
+    private static getCloudFunctions(object: any): string | undefined {
+        return object['dependencies']['cloud_functions'];
+    }
+
+    private static getFirebaseStorage(object: any): string | undefined {
+        return object['dependencies']['firebase_storage'];
     }
 
     private static addDependencyToPubspec(object: any) {
