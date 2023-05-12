@@ -16,7 +16,9 @@
         "onCommand:extension.createServiceLocal",
         "onCommand:extension.createServiceRemoteFirebase",
         "onCommand:extension.createServiceFirebaseAuthentication",
-        "onCommand:extension.createUserModel"
+        "onCommand:extension.createUserModel",
+        "onCommand:extension.createUiLayoutWithListData",
+        "onCommand:extension.createUiLayoutWithData"
     ],
     "main": "./out/extension.js",
     "contributes": {
@@ -55,6 +57,16 @@
                 "command": "flutter-code-generator.createServiceRemoteFirebase",
                 "title": "Create Service Remote Firebase files",
                 "category": "Flutter Architecture"
+            },
+            {
+                "command": "flutter-code-generator.createUiLayoutWithListData",
+                "title": "Create UI Layout with List Data",
+                "category": "Flutter Architecture"
+            },
+            {
+                "command": "flutter-code-generator.createUiLayoutWithData",
+                "title": "Create UI Layout with Data",
+                "category": "Flutter Architecture"
             }
         ],
         "menus": {
@@ -71,6 +83,21 @@
                     "command": "flutter-code-generator.createApp",
                     "group": "1_flutter_code_generator"
                 },
+                
+                {
+                    "command": "flutter-code-generator.createUserModel",
+                    "group": "1_flutter_code_generator"
+                },
+                {
+                    "submenu": "service-submenu",
+                    "group": "1_flutter_code_generator"
+                },
+                {
+                    "submenu": "ui-submenu",
+                    "group": "1_flutter_code_generator"
+                }
+            ],
+            "service-submenu":[
                 {
                     "command": "flutter-code-generator.createServiceLocal",
                     "group": "1_flutter_code_generator"
@@ -82,13 +109,30 @@
                 {
                     "command": "flutter-code-generator.createServiceFirebaseAuthentication",
                     "group": "1_flutter_code_generator"
+                }
+            ],
+            "ui-submenu":[
+                {
+                    "command": "flutter-code-generator.createUiLayoutWithListData",
+                    "group": "1_flutter_code_generator"
                 },
                 {
-                    "command": "flutter-code-generator.createUserModel",
+                    "command": "flutter-code-generator.createUiLayoutWithData",
                     "group": "1_flutter_code_generator"
                 }
             ]
-        }
+        },
+        "submenus":[
+            {
+                "label":"Service",
+                 "id":"service-submenu"
+            },
+            {
+                "label":"UI",
+                "id":"ui-submenu"
+            }
+        ]
+
     },
     "scripts": {
         "vscode:prepublish": "npm run compile",

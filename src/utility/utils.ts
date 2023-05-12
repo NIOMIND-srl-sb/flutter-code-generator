@@ -104,6 +104,8 @@ export class Utils {
                 });
             console.debug(`folderlist: { ${folderList} }`);
             folders = folderList;
+        } else {
+            folders = [nameArray+'/'];
         }
         console.debug(`folders: { ${folders} }`);
         return folders;
