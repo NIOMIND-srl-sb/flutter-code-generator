@@ -43,6 +43,28 @@ import { FirebaseAppAuthFile } from './event/service/auth/firebase_app_auth';
 import { UserModelFile } from './event/model/user_model';
 import { AppLoggerFile } from './event/utility/app_logger';
 import { BaseAppAuthFile } from './event/service/base/base_app_auth';
+import { BaseListDataDiRepositoryFile } from './event/ui/base_di_repository';
+import { ListDataRepositoryFile } from './event/ui/listData/repository';
+import { BaseUiStateFile } from './event/ui/base/base_ui_state';
+import { BaseViewModelFile } from './event/ui/base/base_view_model';
+import { RepositoryServiceLocatorFile } from './event/ui/di_repository';
+import { BaseListDataDiViewModelFile } from './event/ui/base_di_view_model';
+import { BaseListDataViewModelFile } from './event/ui/listData/base/base_view_model';
+import { ListDataViewModelServiceLocatorFile } from './event/ui/di_view_model';
+import { ListDataUiStateFile } from './event/ui/listData/ui_state';
+import { ListDataViewModelFile } from './event/ui/listData/view_model';
+import { ListDataViewFile } from './event/ui/listData/view';
+import { ErrorBannerFile } from './event/widget/error_banner';
+import { LoadingIndicatorFile } from './event/widget/loading_indicator';
+import { BaseListDataRepositoryFile } from './event/ui/listData/base/base_repository';
+import { BaseDataViewModelFile } from './event/ui/data/base/base_view_model';
+import { BaseDataRepositoryFile } from './event/ui/data/base/base_repository';
+import { DataRepositoryFile } from './event/ui/data/repository';
+import { DataUiStateFile } from './event/ui/data/ui_state';
+import { DataViewModelFile } from './event/ui/data/view_model';
+import { DataViewFile } from './event/ui/data/view';
+import { LocalServiceFile } from './event/service/local/local_service';
+import { RemoteServiceFile } from './event/service/remote/remote_service';
 
 export function activate(context: vscode.ExtensionContext) {
     const modelDisposable = vscode.commands.registerCommand(
@@ -72,7 +94,7 @@ export function activate(context: vscode.ExtensionContext) {
             if (!isExistBaseModelFile) {
                 baseModelFile.create();
             }
-            const modelFile = new ModelFile(rootPath, fileName, folders);
+            const modelFile = new ModelFile(rootPath, fileName);
             modelFile.create();
             AppLogger.info('Model is created successfully');
         }
@@ -157,7 +179,7 @@ export function activate(context: vscode.ExtensionContext) {
                 rootPath,
                 'app_settings'
             );
-            const appFile = new AppFile(rootPath, fileName, folders);
+            const appFile = new AppFile(rootPath, fileName);
 
             baseAppSettingsFile.create();
             baseDiAppSettingsFile.create();
@@ -361,6 +383,357 @@ export function activate(context: vscode.ExtensionContext) {
         }
     );
 
+    const uiLayoutWithListDataDisposable = vscode.commands.registerCommand(
+        'flutter-code-generator.createUiLayoutWithListData',
+        async () => {
+            const inputString = await Utils.checkInputString();
+            if (inputString === undefined) {
+                AppLogger.error('Invalid name for file');
+                return;
+            }
+            const folders = Utils.getFolders(inputString);
+
+            const rootPath = VsCodeActions.rootPath;
+            if (rootPath === undefined) {
+                return;
+            }
+
+            const localServiceFile = new LocalServiceFile(
+                rootPath,
+                'local_service'
+            );
+            const localServiceFileExist = FileSystemManager.doesFileExist(
+                localServiceFile.pathValue,
+                localServiceFile.getFileName
+            );
+
+            const remoteServiceFile = new RemoteServiceFile(
+                rootPath,
+                'remote_service'
+            );
+            const remoteServiceFileExist = FileSystemManager.doesFileExist(
+                remoteServiceFile.pathValue,
+                remoteServiceFile.getFileName
+            );
+
+            const baseUiStateFile = new BaseUiStateFile(
+                rootPath,
+                'base_ui_state'
+            );
+            const baseUiStateFileExist = FileSystemManager.doesFileExist(
+                baseUiStateFile.pathValue,
+                baseUiStateFile.getFileName
+            );
+
+            const errorBannerWidgetFile = new ErrorBannerFile(
+                rootPath,
+                'error_banner'
+            );
+            const errorBannerWidgetFileExist = FileSystemManager.doesFileExist(
+                errorBannerWidgetFile.pathValue,
+                errorBannerWidgetFile.getFileName
+            );
+
+            const loadingIndicatorWidgetFile = new LoadingIndicatorFile(
+                rootPath,
+                'loading_indicator'
+            );
+            const loadingIndicatorWidgetFileExist =
+                FileSystemManager.doesFileExist(
+                    loadingIndicatorWidgetFile.pathValue,
+                    loadingIndicatorWidgetFile.getFileName
+                );
+
+            const appLoggerFile = new AppLoggerFile(rootPath, 'app_logger');
+            const appLoggerFileExist = FileSystemManager.doesFileExist(
+                appLoggerFile.pathValue,
+                appLoggerFile.getFileName
+            );
+
+            const baseViewModelFile = new BaseViewModelFile(
+                rootPath,
+                'base_view_model'
+            );
+
+            const baseListDataDiRepositoryFile =
+                new BaseListDataDiRepositoryFile(
+                    rootPath,
+                    'base_di_repository',
+                    folders
+                );
+
+            const baseListDataDiViewModelFile = new BaseListDataDiViewModelFile(
+                rootPath,
+                'base_di_view_model',
+                folders
+            );
+
+            const baseListDataViewModelFile = new BaseListDataViewModelFile(
+                rootPath,
+                'base_view_model',
+                folders
+            );
+
+            const baseListDataRepositoryFile = new BaseListDataRepositoryFile(
+                rootPath,
+                'base_repository',
+                folders
+            );
+
+            const listDataRepositoryServiceLocatorFile =
+                new RepositoryServiceLocatorFile(
+                    rootPath,
+                    'di_repository',
+                    folders
+                );
+
+            const listDataViewModelServiceLocatorFile =
+                new ListDataViewModelServiceLocatorFile(
+                    rootPath,
+                    'di_view_model',
+                    folders
+                );
+
+            const listDataDiRepositoryFile = new ListDataRepositoryFile(
+                rootPath,
+                'repository',
+                folders
+            );
+
+            const listDataUiStateFile = new ListDataUiStateFile(
+                rootPath,
+                'ui_state',
+                folders
+            );
+
+            const listDataViewModelFile = new ListDataViewModelFile(
+                rootPath,
+                'view_model',
+                folders
+            );
+
+            const listDataViewFile = new ListDataViewFile(
+                rootPath,
+                'view',
+                folders
+            );
+
+            if (!remoteServiceFileExist) {
+                remoteServiceFile.create();
+            }
+
+            if (!localServiceFileExist) {
+                localServiceFile.create();
+            }
+
+            if (!baseUiStateFileExist) {
+                baseUiStateFile.create();
+                baseViewModelFile.create();
+            }
+
+            if (!loadingIndicatorWidgetFileExist) {
+                loadingIndicatorWidgetFile.create();
+            }
+
+            if (!errorBannerWidgetFileExist) {
+                errorBannerWidgetFile.create();
+            }
+
+            if (!appLoggerFileExist) {
+                appLoggerFile.create();
+            }
+
+            baseListDataDiRepositoryFile.create();
+            baseListDataDiViewModelFile.create();
+            listDataDiRepositoryFile.create();
+            listDataRepositoryServiceLocatorFile.create();
+            baseListDataViewModelFile.create();
+            listDataViewModelServiceLocatorFile.create();
+            listDataUiStateFile.create();
+            listDataViewModelFile.create();
+            listDataViewFile.create();
+            baseListDataRepositoryFile.create();
+
+            AppLogger.info(
+                'UI Layout With List Data folders created successfully'
+            );
+        }
+    );
+
+    const uiLayoutWithDataDisposable = vscode.commands.registerCommand(
+        'flutter-code-generator.createUiLayoutWithData',
+        async () => {
+            const inputString = await Utils.checkInputString();
+            if (inputString === undefined) {
+                AppLogger.error('Invalid name for file');
+                return;
+            }
+            const folders = Utils.getFolders(inputString);
+
+            const rootPath = VsCodeActions.rootPath;
+            if (rootPath === undefined) {
+                return;
+            }
+
+            const localServiceFile = new LocalServiceFile(
+                rootPath,
+                'local_service'
+            );
+            const localServiceFileExist = FileSystemManager.doesFileExist(
+                localServiceFile.pathValue,
+                localServiceFile.getFileName
+            );
+
+            const remoteServiceFile = new RemoteServiceFile(
+                rootPath,
+                'remote_service'
+            );
+            const remoteServiceFileExist = FileSystemManager.doesFileExist(
+                remoteServiceFile.pathValue,
+                remoteServiceFile.getFileName
+            );
+
+            const baseUiStateFile = new BaseUiStateFile(
+                rootPath,
+                'base_ui_state'
+            );
+            const baseUiStateFileExist = FileSystemManager.doesFileExist(
+                baseUiStateFile.pathValue,
+                baseUiStateFile.getFileName
+            );
+
+            const errorBannerWidgetFile = new ErrorBannerFile(
+                rootPath,
+                'error_banner'
+            );
+            const errorBannerWidgetFileExist = FileSystemManager.doesFileExist(
+                errorBannerWidgetFile.pathValue,
+                errorBannerWidgetFile.getFileName
+            );
+
+            const loadingIndicatorWidgetFile = new LoadingIndicatorFile(
+                rootPath,
+                'loading_indicator'
+            );
+            const loadingIndicatorWidgetFileExist =
+                FileSystemManager.doesFileExist(
+                    loadingIndicatorWidgetFile.pathValue,
+                    loadingIndicatorWidgetFile.getFileName
+                );
+
+            const appLoggerFile = new AppLoggerFile(rootPath, 'app_logger');
+            const appLoggerFileExist = FileSystemManager.doesFileExist(
+                appLoggerFile.pathValue,
+                appLoggerFile.getFileName
+            );
+
+            const baseViewModelFile = new BaseViewModelFile(
+                rootPath,
+                'base_view_model'
+            );
+
+            const baseDataDiRepositoryFile = new BaseListDataDiRepositoryFile(
+                rootPath,
+                'base_di_repository',
+                folders
+            );
+
+            const baseDataDiViewModelFile = new BaseListDataDiViewModelFile(
+                rootPath,
+                'base_di_view_model',
+                folders
+            );
+
+            const baseDataViewModelFile = new BaseDataViewModelFile(
+                rootPath,
+                'base_view_model',
+                folders
+            );
+
+            const baseDataRepositoryFile = new BaseDataRepositoryFile(
+                rootPath,
+                'base_repository',
+                folders
+            );
+
+            const dataRepositoryServiceLocatorFile =
+                new RepositoryServiceLocatorFile(
+                    rootPath,
+                    'di_repository',
+                    folders
+                );
+
+            const dataViewModelServiceLocatorFile =
+                new ListDataViewModelServiceLocatorFile(
+                    rootPath,
+                    'di_view_model',
+                    folders
+                );
+
+            const dataDiRepositoryFile = new DataRepositoryFile(
+                rootPath,
+                'repository',
+                folders
+            );
+
+            const dataUiStateFile = new DataUiStateFile(
+                rootPath,
+                'ui_state',
+                folders
+            );
+
+            const listDataViewModelFile = new DataViewModelFile(
+                rootPath,
+                'view_model',
+                folders
+            );
+
+            const listDataViewFile = new DataViewFile(
+                rootPath,
+                'view',
+                folders
+            );
+
+            if (!remoteServiceFileExist) {
+                remoteServiceFile.create();
+            }
+
+            if (!localServiceFileExist) {
+                localServiceFile.create();
+            }
+
+            if (!baseUiStateFileExist) {
+                baseUiStateFile.create();
+                baseViewModelFile.create();
+            }
+
+            if (!loadingIndicatorWidgetFileExist) {
+                loadingIndicatorWidgetFile.create();
+            }
+
+            if (!errorBannerWidgetFileExist) {
+                errorBannerWidgetFile.create();
+            }
+
+            if (!appLoggerFileExist) {
+                appLoggerFile.create();
+            }
+
+            baseDataDiRepositoryFile.create();
+            baseDataDiViewModelFile.create();
+            dataDiRepositoryFile.create();
+            dataRepositoryServiceLocatorFile.create();
+            baseDataViewModelFile.create();
+            dataViewModelServiceLocatorFile.create();
+            dataUiStateFile.create();
+            listDataViewModelFile.create();
+            listDataViewFile.create();
+            baseDataRepositoryFile.create();
+
+            AppLogger.info('UI Layout With Data folders created successfully');
+        }
+    );
+
     context.subscriptions.push(modelDisposable);
     context.subscriptions.push(styleDisposable);
     context.subscriptions.push(appDisposable);
@@ -368,6 +741,8 @@ export function activate(context: vscode.ExtensionContext) {
     context.subscriptions.push(serviceRemoteFirebaseDisposable);
     context.subscriptions.push(firebaseAppAuthDisposable);
     context.subscriptions.push(userModelDisposable);
+    context.subscriptions.push(uiLayoutWithListDataDisposable);
+    context.subscriptions.push(uiLayoutWithDataDisposable);
 }
 
 export function deactivate() {}

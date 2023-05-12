@@ -6,6 +6,13 @@
     "engines": {
         "vscode": "^1.78.0"
     },
+    "publisher": "NIOMIND",
+    "repository": "https://github.com/NIOMIND-srl-sb/flutter-code-generator",
+    "author": {
+        "email": "info@niomind.com",
+        "name": "NIOMIND",
+        "url": "https://www.niomind.com/"
+    },
     "categories": [
         "Other"
     ],
@@ -16,7 +23,9 @@
         "onCommand:extension.createServiceLocal",
         "onCommand:extension.createServiceRemoteFirebase",
         "onCommand:extension.createServiceFirebaseAuthentication",
-        "onCommand:extension.createUserModel"
+        "onCommand:extension.createUserModel",
+        "onCommand:extension.createUiLayoutWithListData",
+        "onCommand:extension.createUiLayoutWithData"
     ],
     "main": "./out/extension.js",
     "contributes": {
@@ -55,6 +64,16 @@
                 "command": "flutter-code-generator.createServiceRemoteFirebase",
                 "title": "Create Service Remote Firebase files",
                 "category": "Flutter Architecture"
+            },
+            {
+                "command": "flutter-code-generator.createUiLayoutWithListData",
+                "title": "Create UI Layout with List Data",
+                "category": "Flutter Architecture"
+            },
+            {
+                "command": "flutter-code-generator.createUiLayoutWithData",
+                "title": "Create UI Layout with Data",
+                "category": "Flutter Architecture"
             }
         ],
         "menus": {
@@ -72,6 +91,20 @@
                     "group": "1_flutter_code_generator"
                 },
                 {
+                    "command": "flutter-code-generator.createUserModel",
+                    "group": "1_flutter_code_generator"
+                },
+                {
+                    "submenu": "service-submenu",
+                    "group": "1_flutter_code_generator"
+                },
+                {
+                    "submenu": "ui-submenu",
+                    "group": "1_flutter_code_generator"
+                }
+            ],
+            "service-submenu": [
+                {
                     "command": "flutter-code-generator.createServiceLocal",
                     "group": "1_flutter_code_generator"
                 },
@@ -82,13 +115,29 @@
                 {
                     "command": "flutter-code-generator.createServiceFirebaseAuthentication",
                     "group": "1_flutter_code_generator"
+                }
+            ],
+            "ui-submenu": [
+                {
+                    "command": "flutter-code-generator.createUiLayoutWithListData",
+                    "group": "1_flutter_code_generator"
                 },
                 {
-                    "command": "flutter-code-generator.createUserModel",
+                    "command": "flutter-code-generator.createUiLayoutWithData",
                     "group": "1_flutter_code_generator"
                 }
             ]
-        }
+        },
+        "submenus": [
+            {
+                "label": "Service",
+                "id": "service-submenu"
+            },
+            {
+                "label": "UI",
+                "id": "ui-submenu"
+            }
+        ]
     },
     "scripts": {
         "vscode:prepublish": "npm run compile",
@@ -98,24 +147,42 @@
         "lint": "eslint src --ext ts"
     },
     "devDependencies": {
-        "@types/vscode": "^1.78.0",
         "@types/glob": "^8.1.0",
+        "@types/js-yaml": "^3.12.1",
+        "@types/lodash": "^4.14.149",
         "@types/mocha": "^10.0.1",
         "@types/node": "16.x",
         "@types/shelljs": "^0.8.6",
-        "@types/lodash": "^4.14.149",
-        "@types/js-yaml": "^3.12.1",
+        "@types/vscode": "^1.78.0",
         "@typescript-eslint/eslint-plugin": "^5.59.1",
         "@typescript-eslint/parser": "^5.59.1",
+        "@vscode/test-electron": "^2.3.0",
         "eslint": "^8.39.0",
         "glob": "^8.1.0",
         "mocha": "^10.2.0",
+        "prettier": "2.8.8",
         "typescript": "^5.0.4",
-        "@vscode/test-electron": "^2.3.0"
+        "husky": "3.0.5",
+        "lint-staged": "9.2.5"
     },
     "dependencies": {
         "js-yaml": "^3.13.1",
         "lodash": "^4.17.15",
         "shelljs": "^0.8.3"
+    },
+    "prettier": {
+        "singleQuote": true,
+        "tabWidth": 4
+    },
+    "husky": {
+        "hooks": {
+            "pre-commit": "lint-staged"
+        }
+    },
+    "lint-staged": {
+        "*.js": [
+            "prettier --write",
+            "git add"
+        ]
     }
 }

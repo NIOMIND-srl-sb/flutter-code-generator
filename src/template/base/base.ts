@@ -11,6 +11,10 @@ export abstract class BaseTemplate {
         return this.getClassName(this.fileName, this.classSuffix, this.pattern);
     }
 
+    get camelCaseClassName(): string {
+        return _.camelCase(this.fileName);
+    }
+
     private getClassName(
         fileName: string,
         suffix?: string,
