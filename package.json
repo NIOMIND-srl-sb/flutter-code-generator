@@ -13,6 +13,7 @@
         "name": "NIOMIND",
         "url": "https://www.niomind.com/"
     },
+    "icon": "images/flutterCodeGeneratorIcon.png",
     "categories": [
         "Other"
     ],
