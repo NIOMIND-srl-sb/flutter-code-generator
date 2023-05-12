@@ -94,7 +94,7 @@ export class Utils {
     };
 
     public static getFolders = (inputString: String) => {
-        const nameArray = inputString.trim().split('/');
+        const nameArray = inputString.trim().toLowerCase().split('/');
         let folders: string[] = [];
         if (nameArray.length > 1) {
             const folderList = nameArray
@@ -105,8 +105,9 @@ export class Utils {
             console.debug(`folderlist: { ${folderList} }`);
             folders = folderList;
         } else {
-            folders = [nameArray+'/'];
+            folders = [nameArray + '/'];
         }
+
         console.debug(`folders: { ${folders} }`);
         return folders;
     };
