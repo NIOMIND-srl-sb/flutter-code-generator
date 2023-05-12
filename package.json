@@ -6,6 +6,13 @@
     "engines": {
         "vscode": "^1.78.0"
     },
+    "publisher": "NIOMIND",
+    "repository": "https://github.com/NIOMIND-srl-sb/flutter-code-generator",
+    "author": {
+        "email": "info@niomind.com",
+        "name": "NIOMIND",
+        "url": "https://www.niomind.com/"
+    },
     "categories": [
         "Other"
     ],
@@ -83,7 +90,6 @@
                     "command": "flutter-code-generator.createApp",
                     "group": "1_flutter_code_generator"
                 },
-                
                 {
                     "command": "flutter-code-generator.createUserModel",
                     "group": "1_flutter_code_generator"
@@ -97,7 +103,7 @@
                     "group": "1_flutter_code_generator"
                 }
             ],
-            "service-submenu":[
+            "service-submenu": [
                 {
                     "command": "flutter-code-generator.createServiceLocal",
                     "group": "1_flutter_code_generator"
@@ -111,7 +117,7 @@
                     "group": "1_flutter_code_generator"
                 }
             ],
-            "ui-submenu":[
+            "ui-submenu": [
                 {
                     "command": "flutter-code-generator.createUiLayoutWithListData",
                     "group": "1_flutter_code_generator"
@@ -122,17 +128,16 @@
                 }
             ]
         },
-        "submenus":[
+        "submenus": [
             {
-                "label":"Service",
-                 "id":"service-submenu"
+                "label": "Service",
+                "id": "service-submenu"
             },
             {
-                "label":"UI",
-                "id":"ui-submenu"
+                "label": "UI",
+                "id": "ui-submenu"
             }
         ]
-
     },
     "scripts": {
         "vscode:prepublish": "npm run compile",
