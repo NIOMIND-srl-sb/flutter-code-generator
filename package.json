@@ -1,6 +1,6 @@
 {
-    "name": "flutter-code-generator",
-    "displayName": "Flutter code generator",
+    "name": "flutter-code-generator-niomind",
+    "displayName": "Flutter files generator",
     "description": "Flutter code generator",
     "version": "0.0.1",
     "engines": {
@@ -31,47 +31,47 @@
     "contributes": {
         "commands": [
             {
-                "command": "flutter-code-generator.createModel",
+                "command": "flutter-code-generator-niomind.createModel",
                 "title": "Create Model file",
                 "category": "Flutter Architecture"
             },
             {
-                "command": "flutter-code-generator.createStyle",
+                "command": "flutter-code-generator-niomind.createStyle",
                 "title": "Create Style file",
                 "category": "Flutter Architecture"
             },
             {
-                "command": "flutter-code-generator.createApp",
+                "command": "flutter-code-generator-niomind.createApp",
                 "title": "Create App file",
                 "category": "Flutter Architecture"
             },
             {
-                "command": "flutter-code-generator.createServiceLocal",
+                "command": "flutter-code-generator-niomind.createServiceLocal",
                 "title": "Create Service Local files",
                 "category": "Flutter Architecture"
             },
             {
-                "command": "flutter-code-generator.createServiceFirebaseAuthentication",
+                "command": "flutter-code-generator-niomind.createServiceFirebaseAuthentication",
                 "title": "Create Service Firebase Authentication files",
                 "category": "Flutter Architecture"
             },
             {
-                "command": "flutter-code-generator.createUserModel",
+                "command": "flutter-code-generator-niomind.createUserModel",
                 "title": "Create User Model file",
                 "category": "Flutter Architecture"
             },
             {
-                "command": "flutter-code-generator.createServiceRemoteFirebase",
+                "command": "flutter-code-generator-niomind.createServiceRemoteFirebase",
                 "title": "Create Service Remote Firebase files",
                 "category": "Flutter Architecture"
             },
             {
-                "command": "flutter-code-generator.createUiLayoutWithListData",
+                "command": "flutter-code-generator-niomind.createUiLayoutWithListData",
                 "title": "Create UI Layout with List Data",
                 "category": "Flutter Architecture"
             },
             {
-                "command": "flutter-code-generator.createUiLayoutWithData",
+                "command": "flutter-code-generator-niomind.createUiLayoutWithData",
                 "title": "Create UI Layout with Data",
                 "category": "Flutter Architecture"
             }
@@ -79,19 +79,19 @@
         "menus": {
             "explorer/context": [
                 {
-                    "command": "flutter-code-generator.createModel",
+                    "command": "flutter-code-generator-niomind.createModel",
                     "group": "1_flutter_code_generator"
                 },
                 {
-                    "command": "flutter-code-generator.createStyle",
+                    "command": "flutter-code-generator-niomind.createStyle",
                     "group": "1_flutter_code_generator"
                 },
                 {
-                    "command": "flutter-code-generator.createApp",
+                    "command": "flutter-code-generator-niomind.createApp",
                     "group": "1_flutter_code_generator"
                 },
                 {
-                    "command": "flutter-code-generator.createUserModel",
+                    "command": "flutter-code-generator-niomind.createUserModel",
                     "group": "1_flutter_code_generator"
                 },
                 {
@@ -105,25 +105,25 @@
             ],
             "service-submenu": [
                 {
-                    "command": "flutter-code-generator.createServiceLocal",
+                    "command": "flutter-code-generator-niomind.createServiceLocal",
                     "group": "1_flutter_code_generator"
                 },
                 {
-                    "command": "flutter-code-generator.createServiceRemoteFirebase",
+                    "command": "flutter-code-generator-niomind.createServiceRemoteFirebase",
                     "group": "1_flutter_code_generator"
                 },
                 {
-                    "command": "flutter-code-generator.createServiceFirebaseAuthentication",
+                    "command": "flutter-code-generator-niomind.createServiceFirebaseAuthentication",
                     "group": "1_flutter_code_generator"
                 }
             ],
             "ui-submenu": [
                 {
-                    "command": "flutter-code-generator.createUiLayoutWithListData",
+                    "command": "flutter-code-generator-niomind.createUiLayoutWithListData",
                     "group": "1_flutter_code_generator"
                 },
                 {
-                    "command": "flutter-code-generator.createUiLayoutWithData",
+                    "command": "flutter-code-generator-niomind.createUiLayoutWithData",
                     "group": "1_flutter_code_generator"
                 }
             ]

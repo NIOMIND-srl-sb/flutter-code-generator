@@ -68,7 +68,7 @@ import { RemoteServiceFile } from './event/service/remote/remote_service';
 
 export function activate(context: vscode.ExtensionContext) {
     const modelDisposable = vscode.commands.registerCommand(
-        'flutter-code-generator.createModel',
+        'flutter-code-generator-niomind.createModel',
         async () => {
             const inputString = await Utils.checkInputString();
             if (inputString === undefined) {
@@ -101,7 +101,7 @@ export function activate(context: vscode.ExtensionContext) {
     );
 
     const styleDisposable = vscode.commands.registerCommand(
-        'flutter-code-generator.createStyle',
+        'flutter-code-generator-niomind.createStyle',
         async () => {
             const rootPath = VsCodeActions.rootPath;
             if (rootPath === undefined) {
@@ -145,7 +145,7 @@ export function activate(context: vscode.ExtensionContext) {
     );
 
     const appDisposable = vscode.commands.registerCommand(
-        'flutter-code-generator.createApp',
+        'flutter-code-generator-niomind.createApp',
         async () => {
             const inputString = await Utils.checkInputString();
             if (inputString === undefined) {
@@ -191,7 +191,7 @@ export function activate(context: vscode.ExtensionContext) {
     );
 
     const serviceLocalDisposable = vscode.commands.registerCommand(
-        'flutter-code-generator.createServiceLocal',
+        'flutter-code-generator-niomind.createServiceLocal',
         async () => {
             const rootPath = VsCodeActions.rootPath;
             if (rootPath === undefined) {
@@ -262,7 +262,7 @@ export function activate(context: vscode.ExtensionContext) {
     );
 
     const serviceRemoteFirebaseDisposable = vscode.commands.registerCommand(
-        'flutter-code-generator.createServiceRemoteFirebase',
+        'flutter-code-generator-niomind.createServiceRemoteFirebase',
         async () => {
             const rootPath = VsCodeActions.rootPath;
             if (rootPath === undefined) {
@@ -315,7 +315,7 @@ export function activate(context: vscode.ExtensionContext) {
     );
 
     const firebaseAppAuthDisposable = vscode.commands.registerCommand(
-        'flutter-code-generator.createServiceFirebaseAuthentication',
+        'flutter-code-generator-niomind.createServiceFirebaseAuthentication',
         async () => {
             const rootPath = VsCodeActions.rootPath;
             if (rootPath === undefined) {
@@ -358,7 +358,7 @@ export function activate(context: vscode.ExtensionContext) {
     );
 
     const userModelDisposable = vscode.commands.registerCommand(
-        'flutter-code-generator.createUserModel',
+        'flutter-code-generator-niomind.createUserModel',
         async () => {
             const rootPath = VsCodeActions.rootPath;
             if (rootPath === undefined) {
@@ -384,7 +384,7 @@ export function activate(context: vscode.ExtensionContext) {
     );
 
     const uiLayoutWithListDataDisposable = vscode.commands.registerCommand(
-        'flutter-code-generator.createUiLayoutWithListData',
+        'flutter-code-generator-niomind.createUiLayoutWithListData',
         async () => {
             const inputString = await Utils.checkInputString();
             if (inputString === undefined) {
@@ -561,7 +561,7 @@ export function activate(context: vscode.ExtensionContext) {
     );
 
     const uiLayoutWithDataDisposable = vscode.commands.registerCommand(
-        'flutter-code-generator.createUiLayoutWithData',
+        'flutter-code-generator-niomind.createUiLayoutWithData',
         async () => {
             const inputString = await Utils.checkInputString();
             if (inputString === undefined) {
