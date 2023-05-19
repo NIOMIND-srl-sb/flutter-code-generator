@@ -10,12 +10,24 @@ import 'base/base_color.dart';
 
 class AppColor extends BaseAppColor {
   @override
-  // TODO: implement darkBackground
-  Color get darkBackground => throw UnimplementedError();
+  // TODO: implement darkError
+  MaterialColor get darkError => throw UnimplementedError();
 
   @override
-  // TODO: implement darkError
-  Color get darkError => throw UnimplementedError();
+  // TODO: implement darkPrimary
+  MaterialColor get darkPrimary => throw UnimplementedError();
+
+  @override
+  // TODO: implement darkSecondary
+  MaterialColor get darkSecondary => throw UnimplementedError();
+
+  @override
+  // TODO: implement darkTertiary
+  MaterialColor get darkTertiary => throw UnimplementedError();
+
+  @override
+  // TODO: implement darkBackground
+  Color get darkBackground => throw UnimplementedError();
 
   @override
   // TODO: implement darkErrorContainer
@@ -86,16 +98,8 @@ class AppColor extends BaseAppColor {
   Color get darkOutlineVariant => throw UnimplementedError();
 
   @override
-  // TODO: implement darkPrimary
-  Color get darkPrimary => throw UnimplementedError();
-
-  @override
   // TODO: implement darkPrimaryContainer
   Color get darkPrimaryContainer => throw UnimplementedError();
-
-  @override
-  // TODO: implement darkSecondary
-  Color get darkSecondary => throw UnimplementedError();
 
   @override
   // TODO: implement darkSecondaryContainer
@@ -122,20 +126,21 @@ class AppColor extends BaseAppColor {
   Color get darkSurfaceVariant => throw UnimplementedError();
 
   @override
-  // TODO: implement darkTertiary
-  Color get darkTertiary => throw UnimplementedError();
-
-  @override
   // TODO: implement darkTertiaryContainer
   Color get darkTertiaryContainer => throw UnimplementedError();
 
   @override
-  // TODO: implement lightBackground
-  Color get lightBackground => throw UnimplementedError();
+  // TODO: implement darkNeutral
+  MaterialColor get darkNeutral => throw UnimplementedError();
 
   @override
-  // TODO: implement lightError
-  Color get lightError => throw UnimplementedError();
+  // TODO: implement darkNeutralVariant
+  MaterialColor get darkNeutralVariant => throw UnimplementedError();
+
+
+  @override
+  // TODO: implement lightBackground
+  Color get lightBackground => throw UnimplementedError();
 
   @override
   // TODO: implement lightErrorContainer
@@ -206,16 +211,8 @@ class AppColor extends BaseAppColor {
   Color get lightOutlineVariant => throw UnimplementedError();
 
   @override
-  // TODO: implement lightPrimary
-  Color get lightPrimary => throw UnimplementedError();
-
-  @override
   // TODO: implement lightPrimaryContainer
   Color get lightPrimaryContainer => throw UnimplementedError();
-
-  @override
-  // TODO: implement lightSecondary
-  Color get lightSecondary => throw UnimplementedError();
 
   @override
   // TODO: implement lightSecondaryContainer
@@ -242,12 +239,32 @@ class AppColor extends BaseAppColor {
   Color get lightSurfaceVariant => throw UnimplementedError();
 
   @override
-  // TODO: implement lightTertiary
-  Color get lightTertiary => throw UnimplementedError();
-
-  @override
   // TODO: implement lightTertiaryContainer
   Color get lightTertiaryContainer => throw UnimplementedError();
+  
+  @override
+  // TODO: implement lightError
+  MaterialColor get lightError => throw UnimplementedError();
+  
+  @override
+  // TODO: implement lightPrimary
+  MaterialColor get lightPrimary => throw UnimplementedError();
+  
+  @override
+  // TODO: implement lightSecondary
+  MaterialColor get lightSecondary => throw UnimplementedError();
+  
+  @override
+  // TODO: implement lightTertiary
+  MaterialColor get lightTertiary => throw UnimplementedError();
+
+  @override
+  // TODO: implement lightNeutral
+  MaterialColor get lightNeutral => throw UnimplementedError();
+
+  @override
+  // TODO: implement lightNeutralVariant
+  MaterialColor get lightNeutralVariant => throw UnimplementedError();
 }`;
     }
 
