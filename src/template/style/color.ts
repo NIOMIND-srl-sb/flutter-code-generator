@@ -7,8 +7,9 @@ export class Color extends BaseTemplate {
         super(fileName, suffix);
         this._dartString = `import 'package:flutter/material.dart';
 import 'base/base_color.dart';
+import 'base/base_custom_color.dart';
 
-class AppColor extends BaseAppColor {
+class AppColor extends BaseAppColor with BaseAppCustomColor {
   @override
   // TODO: implement darkError
   MaterialColor get darkError => throw UnimplementedError();

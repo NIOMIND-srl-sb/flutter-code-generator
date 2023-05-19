@@ -121,6 +121,14 @@ export class YamlHelper {
             haveToUpdate = true;
         }
 
+        const googleFontsVersion = '^4.0.4';
+        const googleFonts = this.getGoogleFontsIn(object);
+        AppLogger.debug(`googleFonts: ${googleFonts}`);
+        if (googleFonts === undefined) {
+            object['dependencies']['google_fonts'] = googleFontsVersion;
+            haveToUpdate = true;
+        }
+
         if (haveToUpdate) {
             this.addDependencyToPubspec(object);
         }
@@ -205,6 +213,10 @@ export class YamlHelper {
 
     private static getGoogleSignIn(object: any): string | undefined {
         return object['dependencies']['google_sign_in'];
+    }
+
+    private static getGoogleFontsIn(object: any): string | undefined {
+        return object['dependencies']['google_fonts'];
     }
 
     private static addDependencyToPubspec(object: any) {
