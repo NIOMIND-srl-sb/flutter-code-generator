@@ -8,7 +8,7 @@ export class BaseDataRepository extends BaseTemplate {
         this._dartString = `import 'dart:async';
 
 abstract class Base${this.className}Repository {
-  Base${this.className}Repository();
+  const Base${this.className}Repository();
 
   Stream<dynamic> get streamData;
   Future<void> getData({
