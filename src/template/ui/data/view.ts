@@ -40,7 +40,7 @@ class _${this.className}ViewState extends State<${this.className}View> {
   loadMore() {
     if (scrollController.position.maxScrollExtent ==
         scrollController.position.pixels) {
-      activityViewModel?.refreshData();
+      ${this.camelCaseClassName}ViewModel?.refreshData();
     }
   }
 
