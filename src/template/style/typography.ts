@@ -70,10 +70,7 @@ class AppTypography extends BaseAppTypography with BaseAppCustomTypography {
   @override
   // TODO: implement titleSmall
   TextStyle get titleSmall => throw UnimplementedError();
-
-  @override
-  // TODO: implement decoratedText
-  TextStyle get decoratedText => throw UnimplementedError();
+  
 }`;
     }
 

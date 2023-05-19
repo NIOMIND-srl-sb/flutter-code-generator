@@ -130,22 +130,6 @@ class AppColor extends BaseAppColor with BaseAppCustomColor {
   // TODO: implement darkTertiaryContainer
   Color get darkTertiaryContainer => throw UnimplementedError();
 
-    @override
-  // TODO: implement darkTextBody
-  Color get darkTextBody => throw UnimplementedError();
-
-  @override
-  // TODO: implement darkTextLink
-  Color get darkTextLink => throw UnimplementedError();
-
-  @override
-  // TODO: implement darkTextLabel
-  Color get darkTextLabel => throw UnimplementedError();
-
-  @override
-  // TODO: implement darkTextTitle
-  Color get darkTextTitle => throw UnimplementedError();
-
   @override
   // TODO: implement darkNeutral
   MaterialColor get darkNeutral => throw UnimplementedError();
@@ -258,22 +242,6 @@ class AppColor extends BaseAppColor with BaseAppCustomColor {
   @override
   // TODO: implement lightTertiaryContainer
   Color get lightTertiaryContainer => throw UnimplementedError();
-
-  @override
-  // TODO: implement lightTextBody
-  Color get lightTextBody => throw UnimplementedError();
-
-  @override
-  // TODO: implement lightTextLink
-  Color get lightTextLink => throw UnimplementedError();
-
-  @override
-  // TODO: implement lightTextLabel
-  Color get lightTextLabel => throw UnimplementedError();
-
-  @override
-  // TODO: implement lightTextTitle
-  Color get lightTextTitle => throw UnimplementedError();
   
   @override
   // TODO: implement lightError

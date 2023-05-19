@@ -5,19 +5,7 @@ export class BaseCustomColor extends BaseTemplate {
 
     constructor(fileName: string, suffix: string) {
         super(fileName, suffix);
-        this._dartString = `import 'package:flutter/material.dart';
-
-abstract mixin class BaseAppCustomColor {
-  Color get lightTextBody;
-  Color get lightTextLink;
-  Color get lightTextLabel;
-  Color get lightTextTitle;
-
-  Color get darkTextBody;
-  Color get darkTextLink;
-  Color get darkTextLabel;
-  Color get darkTextTitle;
-}`;
+        this._dartString = `abstract mixin class BaseAppCustomColor {}`;
     }
 
     get dartString(): string {

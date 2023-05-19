@@ -5,11 +5,7 @@ export class BaseCustomTypography extends BaseTemplate {
 
     constructor(fileName: string, suffix: string) {
         super(fileName, suffix);
-        this._dartString = `import 'package:flutter/material.dart';
-
-abstract mixin class BaseAppCustomTypography {
-  TextStyle get decoratedText;
-}`;
+        this._dartString = `abstract mixin class BaseAppCustomTypography {}`;
     }
 
     get dartString(): string {
