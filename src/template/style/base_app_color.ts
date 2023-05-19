@@ -8,19 +8,19 @@ export class BaseAppColor extends BaseTemplate {
         this._dartString = `import 'package:flutter/material.dart';
 
 abstract class BaseAppColor {
-  Color get darkPrimary;
+  MaterialColor get darkPrimary;
   Color get darkOnPrimary;
   Color get darkPrimaryContainer;
   Color get darkOnPrimaryContainer;
-  Color get darkSecondary;
+  MaterialColor get darkSecondary;
   Color get darkOnSecondary;
   Color get darkSecondaryContainer;
   Color get darkOnSecondaryContainer;
-  Color get darkTertiary;
+  MaterialColor get darkTertiary;
   Color get darkOnTertiary;
   Color get darkTertiaryContainer;
   Color get darkOnTertiaryContainer;
-  Color get darkError;
+  MaterialColor get darkError;
   Color get darkOnError;
   Color get darkErrorContainer;
   Color get darkOnErrorContainer;
@@ -38,20 +38,22 @@ abstract class BaseAppColor {
   Color get darkOutlineVariant;
   Color get darkShadow;
   Color get darkInversePrimary;
+  MaterialColor get darkNeutral;
+  MaterialColor get darkNeutralVariant;
 
-  Color get lightPrimary;
+  MaterialColor get lightPrimary;
   Color get lightOnPrimary;
   Color get lightPrimaryContainer;
   Color get lightOnPrimaryContainer;
-  Color get lightSecondary;
+  MaterialColor get lightSecondary;
   Color get lightOnSecondary;
   Color get lightSecondaryContainer;
   Color get lightOnSecondaryContainer;
-  Color get lightTertiary;
+  MaterialColor get lightTertiary;
   Color get lightOnTertiary;
   Color get lightTertiaryContainer;
   Color get lightOnTertiaryContainer;
-  Color get lightError;
+  MaterialColor get lightError;
   Color get lightOnError;
   Color get lightErrorContainer;
   Color get lightOnErrorContainer;
@@ -69,6 +71,8 @@ abstract class BaseAppColor {
   Color get lightOutlineVariant;
   Color get lightShadow;
   Color get lightInversePrimary;
+  MaterialColor get lightNeutral;
+  MaterialColor get lightNeutralVariant;
 }`;
     }
 
