@@ -65,6 +65,8 @@ import { DataViewModelFile } from './event/ui/data/view_model';
 import { DataViewFile } from './event/ui/data/view';
 import { LocalServiceFile } from './event/service/local/local_service';
 import { RemoteServiceFile } from './event/service/remote/remote_service';
+import { BaseCustomColorFile } from './event/style/base_custom_color';
+import { BaseCustomTypographyFile } from './event/style/base_custom_typography';
 
 export function activate(context: vscode.ExtensionContext) {
     const modelDisposable = vscode.commands.registerCommand(
@@ -130,6 +132,16 @@ export function activate(context: vscode.ExtensionContext) {
             const themeFile = new ThemeFile(rootPath, 'theme');
             const typographyFile = new TypographyFile(rootPath, 'typography');
 
+            const baseCustomTypographyFile = new BaseCustomTypographyFile(
+                rootPath,
+                'base_custom_typography'
+            );
+
+            const baseCustomColorFile = new BaseCustomColorFile(
+                rootPath,
+                'base_custom_color'
+            );
+
             baseAppColorFile.create();
             baseDiAppThemeFile.create();
             baseElevationFile.create();
@@ -140,6 +152,8 @@ export function activate(context: vscode.ExtensionContext) {
             elevationColorFile.create();
             themeFile.create();
             typographyFile.create();
+            baseCustomTypographyFile.create();
+            baseCustomColorFile.create();
             AppLogger.info('Style is created successfully');
         }
     );

@@ -7,8 +7,9 @@ export class Color extends BaseTemplate {
         super(fileName, suffix);
         this._dartString = `import 'package:flutter/material.dart';
 import 'base/base_color.dart';
+import 'base/base_custom_color.dart';
 
-class AppColor extends BaseAppColor {
+class AppColor extends BaseAppColor with BaseAppCustomColor {
   @override
   // TODO: implement darkBackground
   Color get darkBackground => throw UnimplementedError();
@@ -129,6 +130,22 @@ class AppColor extends BaseAppColor {
   // TODO: implement darkTertiaryContainer
   Color get darkTertiaryContainer => throw UnimplementedError();
 
+    @override
+  // TODO: implement darkTextBody
+  Color get darkTextBody => throw UnimplementedError();
+
+  @override
+  // TODO: implement darkTextLink
+  Color get darkTextLink => throw UnimplementedError();
+
+  @override
+  // TODO: implement darkTextLabel
+  Color get darkTextLabel => throw UnimplementedError();
+
+  @override
+  // TODO: implement darkTextTitle
+  Color get darkTextTitle => throw UnimplementedError();
+
   @override
   // TODO: implement lightBackground
   Color get lightBackground => throw UnimplementedError();
@@ -248,6 +265,22 @@ class AppColor extends BaseAppColor {
   @override
   // TODO: implement lightTertiaryContainer
   Color get lightTertiaryContainer => throw UnimplementedError();
+
+  @override
+  // TODO: implement lightTextBody
+  Color get lightTextBody => throw UnimplementedError();
+
+  @override
+  // TODO: implement lightTextLink
+  Color get lightTextLink => throw UnimplementedError();
+
+  @override
+  // TODO: implement lightTextLabel
+  Color get lightTextLabel => throw UnimplementedError();
+
+  @override
+  // TODO: implement lightTextTitle
+  Color get lightTextTitle => throw UnimplementedError();
 }`;
     }
 

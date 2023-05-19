@@ -7,8 +7,10 @@ export class Typography extends BaseTemplate {
         super(fileName, suffix);
         this._dartString = `import 'package:flutter/material.dart';
 import 'base/base_typography.dart';
+import 'base/base_custom_typography.dart';
+import 'package:google_fonts/google_fonts.dart';
 
-class AppTypography extends BaseAppTypography {
+class AppTypography extends BaseAppTypography with BaseAppCustomTypography {
   @override
   // TODO: implement bodyLarge
   TextStyle get bodyLarge => throw UnimplementedError();
@@ -68,6 +70,10 @@ class AppTypography extends BaseAppTypography {
   @override
   // TODO: implement titleSmall
   TextStyle get titleSmall => throw UnimplementedError();
+
+  @override
+  // TODO: implement decoratedText
+  TextStyle get decoratedText => throw UnimplementedError();
 }`;
     }
 
