@@ -64,7 +64,7 @@ class User extends BaseModel {
 
     @override
     String get tableString => '''
-      CREATE TABLE IF NOT EXISTS User(
+      CREATE TABLE IF NOT EXISTS $tableName(
         uid TEXT PRIMARY KEY NOT NULL,
         displayName TEXT NOT NULL,
         email TEXT NOT NULL,
